@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustCart VN - Nền Tảng TMĐT Minh Bạch | Đồ Án TMĐT FTU</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ftu: {
+                            red: '#9e1b32',
+                            light: '#fdf2f4',
+                            dark: '#7a1224'
+                        },
+                        brand: {
+                            indigo: '#4f46e5',
+                            emerald: '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+        }
+        .cam-thuong-grain {
+            background-image: radial-gradient(rgba(0,0,0,0.07) 1px, transparent 0);
+            background-size: 10px 10px;
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+        .animate-float {
+            animation: floatSlow 3s ease-in-out infinite;
+        }
+        .typing-dot {
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-indigo-600 selection:text-white">
+
+    <!-- Top Academic Banner (FTU Student Project Info) -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-ftu-dark text-white text-xs py-2.5 px-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-2 font-medium text-center sm:text-left">
+                <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase">FTU E-Commerce Project</span>
+                <span>Đồ án: <strong>TrustCart VN – Giải pháp Cải thiện Trải nghiệm & Bảo vệ Người tiêu dùng Trực tuyến</strong></span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openAIChatWithPrompt('Hãy giới thiệu tổng quan 5 giải pháp đột phá của nền tảng TrustCart VN dành cho môn Thương mại điện tử FTU.')" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full text-xs transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> Hỏi Trợ lý AI
+                </button>
+                <button onclick="switchMainTab('presentation')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-3 py-1 rounded-full text-xs transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-chalkboard-user"></i> Báo cáo Đồ án FTU
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Sticky Navigation Header -->
+    <header class="sticky top-0 z-40 glass-header border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchMainTab('prototype')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-emerald-500 flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-shield-heart text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-extrabold text-xl tracking-tight text-slate-900">TrustCart<span class="text-indigo-600">VN</span></span>
+                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-300 hidden sm:inline-block">Live Web v3.0</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 hidden md:block">Minh bạch Chất liệu • Chống Sale Ảo • Bảo mật Giao nhận</p>
+                </div>
+            </div>
+
+            <!-- Interactive Navigation Pills -->
+            <nav class="hidden xl:flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/70">
+                <button onclick="scrollToSection('sec-product')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-white hover:text-indigo-600 hover:shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-camera-rotate text-indigo-600"></i> 1. TrueView & AI Fit
+                </button>
+                <button onclick="scrollToSection('sec-price-review')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-white hover:text-indigo-600 hover:shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-chart-line text-emerald-600"></i> 2. Giá 90 Ngày & Viết Review
+                </button>
+                <button onclick="scrollToSection('sec-logistics')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-white hover:text-indigo-600 hover:shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-shield text-amber-600"></i> 3. Vận đơn Ẩn danh & Escrow
+                </button>
+            </nav>
+
+            <!-- Action Controls: Mode Switch, Orders, Cart -->
+            <div class="flex items-center gap-2">
+                <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200">
+                    <button id="tab-btn-prototype" onclick="switchMainTab('prototype')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition">
+                        <i class="fa-solid fa-store mr-1 text-indigo-600"></i>Cửa hàng
+                    </button>
+                    <button id="tab-btn-presentation" onclick="switchMainTab('presentation')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 transition">
+                        <i class="fa-solid fa-chart-pie mr-1 text-ftu-red"></i>Báo cáo
+                    </button>
+                </div>
+
+                <!-- My Orders Button -->
+                <button onclick="toggleOrdersModal()" class="relative px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 transition flex items-center gap-1.5 text-xs font-bold" title="Xem đơn hàng đã đặt & Thử tính năng Đổi trả 1-Chạm">
+                    <i class="fa-solid fa-box-archive text-emerald-600"></i>
+                    <span class="hidden sm:inline">Đơn hàng</span>
+                    <span id="orders-badge" class="bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">1</span>
+                </button>
+
+                <!-- Cart / Anti-FOMO Guard Button -->
+                <button onclick="openCheckoutFlow('cart')" class="relative p-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 transition" title="Giỏ hàng & Kiểm soát chi tiêu Anti-FOMO">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-ftu-red text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">1</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pain-Point Quick Bar -->
+    <section class="bg-white border-b border-slate-200 py-2.5 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-compass text-indigo-600"></i> Trải nghiệm nhanh 5 Giải pháp TMĐT:
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+                <button onclick="highlightSolution('sec-product', 'Giải pháp #1: Ảnh Cam thường tại kho & AI Ướm thử Size')" class="text-xs bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-300 border border-slate-200 px-3 py-1 rounded-full font-medium transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span> 1. Soi vải Cotton 250gsm & Chọn Size
+                </button>
+                <button onclick="highlightSolution('sec-price-review', 'Giải pháp #2: Biểu đồ giá 90 ngày & Trực tiếp viết đánh giá')" class="text-xs bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 border border-slate-200 px-3 py-1 rounded-full font-medium transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 2. Check Sale Ảo & Viết Bình Luận
+                </button>
+                <button onclick="highlightSolution('sec-logistics', 'Giải pháp #3: Phiếu vận đơn ẩn danh PrivacyShield & Escrow')" class="text-xs bg-slate-100 hover:bg-amber-50 hover:text-amber-800 hover:border-amber-300 border border-slate-200 px-3 py-1 rounded-full font-medium transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span> 3. Che SĐT Giao Hàng & Hoàn Tiền 2h
+                </button>
+                <button onclick="openCheckoutFlow('buy')" class="text-xs bg-slate-100 hover:bg-rose-50 hover:text-ftu-red hover:border-rose-300 border border-slate-200 px-3 py-1 rounded-full font-medium transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-ftu-red"></span> 4. Đặt Hàng Thật & Chống FOMO
+                </button>
+                <button onclick="toggleAIChat(true)" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-full font-semibold transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-robot"></i> 5. Chat với AI Bảo Vệ Người Mua
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Toast Notification -->
+    <div id="toast-container" class="fixed bottom-24 right-5 z-50 hidden max-w-sm bg-slate-900 text-white px-4 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-start gap-3 transition-all">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5"></i>
+        <div class="flex-1">
+            <h4 id="toast-title" class="text-xs font-bold uppercase tracking-wider text-emerald-400">TrustCart VN</h4>
+            <p id="toast-msg" class="text-xs text-slate-200 mt-0.5 leading-relaxed"></p>
+        </div>
+        <button onclick="hideToast()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 1: INTERACTIVE E-COMMERCE PLATFORM                             -->
+    <!-- =================================================================== -->
+    <main id="view-prototype" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Banner & Product Category Switcher -->
+        <div class="bg-gradient-to-r from-indigo-950 via-slate-900 to-emerald-950 rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+            <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 px-3 py-1 rounded-full text-xs font-semibold text-emerald-300">
+                        <i class="fa-solid fa-shield-check"></i> Tương tác Thời gian thực • Dữ liệu lưu trữ trực tiếp
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                        Trải Nghiệm Mua Sắm Minh Bạch Trên TrustCart VN
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Mọi người truy cập đường link này có thể <strong>chọn màu/size, đặt mua đơn hàng thật, tự viết bình luận đánh giá</strong> và <strong>trò chuyện trực tiếp với Trợ lý AI</strong> để kiểm chứng giải pháp.
+                    </p>
+                </div>
+
+                <!-- Switch Demo Product Category -->
+                <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/15 flex flex-col gap-2 min-w-[270px]">
+                    <span class="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">Đổi sản phẩm trải nghiệm:</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button id="prod-btn-fashion" onclick="selectProduct('fashion')" class="px-3 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-900 shadow-sm flex items-center justify-center gap-2 transition">
+                            <i class="fa-solid fa-shirt text-indigo-600"></i> Áo Thun 250gsm
+                        </button>
+                        <button id="prod-btn-blazer" onclick="selectProduct('blazer')" class="px-3 py-2.5 rounded-xl text-xs font-bold bg-white/10 text-white hover:bg-white/20 flex items-center justify-center gap-2 transition">
+                            <i class="fa-solid fa-user-tie text-emerald-400"></i> Áo Khoác Blazer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 1: PRODUCT SHOWCASE + TRUE-VIEW CAMERA + AI VIRTUAL FIT  -->
+        <!-- =============================================================== -->
+        <section id="sec-product" class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-8 transition-all">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold text-sm flex items-center justify-center">01</span>
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-bold text-slate-900">Giải pháp #1: Minh bạch Hình ảnh (TrueView™) & AI Ướm Thử Kích Cỡ</h2>
+                        <p class="text-xs text-slate-500">Khắc phục: <em>"Hình quảng cáo lung linh nhưng nhận hàng vải mỏng, lệch tông màu, sai kích cỡ"</em></p>
+                    </div>
+                </div>
+                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                    <i class="fa-solid fa-certificate"></i> Đã kiểm định định lượng vải tại kho TrustCart
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left Column: Visual Comparison Studio vs Unedited Cam Thuong vs Macro -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="bg-slate-100 p-1.5 rounded-2xl flex items-center justify-between gap-1 border border-slate-200">
+                        <button id="view-btn-studio" onclick="setVisualMode('studio')" class="flex-1 py-2 px-2.5 rounded-xl text-xs font-bold bg-white text-slate-900 shadow-sm transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-wand-magic-sparkles text-indigo-500"></i> Ảnh Studio
+                        </button>
+                        <button id="view-btn-raw" onclick="setVisualMode('raw')" class="flex-1 py-2 px-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-mobile-screen-button text-emerald-600"></i> Cam Thường Tại Kho
+                        </button>
+                        <button id="view-btn-micro" onclick="setVisualMode('micro')" class="flex-1 py-2 px-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-magnifying-glass-plus text-ftu-red"></i> Macro 10x Sợi Vải
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Visual Canvas Container -->
+                    <div id="visual-display-box" class="relative rounded-2xl overflow-hidden border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-200 min-h-[380px] flex flex-col justify-between p-6 transition-all">
+                        <div class="flex items-center justify-between z-10">
+                            <span id="visual-badge-left" class="bg-slate-900/80 backdrop-blur-md text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                                <i class="fa-solid fa-camera text-indigo-400"></i> Ảnh Studio Ánh Sáng Chuẩn
+                            </span>
+                            <span id="visual-badge-right" class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                Độ tương đồng thực tế: 98.2%
+                            </span>
+                        </div>
+
+                        <!-- Center SVG Illustration -->
+                        <div id="visual-svg-container" class="my-auto py-6 flex flex-col items-center justify-center text-center">
+                            <!-- Filled dynamically via JS -->
+                        </div>
+
+                        <!-- Bottom Reality Inspection Bar -->
+                        <div class="bg-white/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-200/80 shadow-sm z-10">
+                            <div class="grid grid-cols-3 gap-2 text-center divide-x divide-slate-200">
+                                <div>
+                                    <p class="text-[11px] text-slate-500">Độ lệch màu sắc</p>
+                                    <p id="spec-color-diff" class="text-xs font-bold text-slate-800">±2% (Ánh sáng tự nhiên)</p>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] text-slate-500" id="spec-label-2">Định lượng vải thực tế</p>
+                                    <p id="spec-val-2" class="text-xs font-bold text-indigo-600">Cotton Compact 250 GSM</p>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] text-slate-500">Kiểm định chất lượng</p>
+                                    <p class="text-xs font-bold text-emerald-600"><i class="fa-solid fa-circle-check mr-1"></i>TrustQC #FTU26</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-200/80 flex items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center gap-2.5 text-emerald-900">
+                            <i class="fa-solid fa-circle-question text-emerald-600 text-base"></i>
+                            <span>Bạn phân vân chất vải <strong>Cotton 250gsm</strong> mặc ở TP.HCM có nóng không?</span>
+                        </div>
+                        <button onclick="openAIChatWithPrompt('Chất vải Cotton 250gsm của áo này mặc đi học hoặc chạy bộ buổi chiều ở TP.HCM có bị nóng hay bí mồ hôi không? Hãy tư vấn thật lòng giúp mình.')" class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-xl transition">
+                            Hỏi AI ngay
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Product Selection (Color, Size, Qty) & AI Virtual Fit -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-5">
+                    <div class="space-y-3.5">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-md">TrustMall Chính Hãng</span>
+                            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-2.5 py-0.5 rounded-md flex items-center gap-1">
+                                <i class="fa-solid fa-rotate-left"></i> Đổi trả 1-Chạm miễn phí 15 ngày
+                            </span>
+                            <span class="text-xs text-slate-400">Mã SP: #TC-FTU-250</span>
+                        </div>
+
+                        <h3 id="prod-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+                            Áo Thun Boxy Heavyweight Cotton Compact 250gsm - Chuẩn Form Đứng Không Xù Lông
+                        </h3>
+
+                        <!-- Rating & Verified Summary -->
+                        <div class="flex items-center gap-4 text-xs">
+                            <div class="flex items-center gap-1 text-amber-500 font-bold">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                                <span id="prod-rating" class="text-slate-800 ml-1 text-sm">4.9/5.0</span>
+                            </div>
+                            <span class="text-slate-300">|</span>
+                            <button onclick="scrollToSection('sec-price-review')" class="text-indigo-600 font-semibold hover:underline flex items-center gap-1">
+                                <i class="fa-solid fa-comments"></i> <span id="total-reviews-count">5</span> Đánh giá thực tế (Bấm để viết nhận xét)
+                            </button>
+                        </div>
+
+                        <!-- Transparent Pricing Box -->
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <div class="flex items-baseline gap-2.5">
+                                    <span id="prod-price-current" class="text-2xl sm:text-3xl font-extrabold text-indigo-600">279.000₫</span>
+                                    <span id="prod-price-old" class="text-sm text-slate-400 line-through">340.000₫</span>
+                                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-0.5 rounded-md">-18% Giảm thật</span>
+                                </div>
+                                <p class="text-[11px] text-emerald-700 font-medium mt-1 flex items-center gap-1">
+                                    <i class="fa-solid fa-check-circle"></i> Giá thấp nhất trong 90 ngày qua (Đã kiểm chứng không nâng giá gốc ảo).
+                                </p>
+                            </div>
+                            <button onclick="scrollToSection('sec-price-review')" class="text-xs bg-white hover:bg-slate-100 text-slate-700 font-semibold px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm transition">
+                                <i class="fa-solid fa-chart-line text-emerald-600 mr-1"></i>Lịch sử giá
+                            </button>
+                        </div>
+
+                        <!-- Color, Size & Quantity Selectors -->
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 pt-1">
+                            <!-- Color Selector -->
+                            <div class="sm:col-span-5">
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Màu sắc: <span id="selected-color-label" class="text-indigo-600">Đen Than (Charcoal)</span></label>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="selectColor('Đen Than (Charcoal)', '#1e293b', this)" class="color-btn w-8 h-8 rounded-full bg-slate-800 ring-2 ring-offset-2 ring-indigo-600 transition" title="Đen Than"></button>
+                                    <button onclick="selectColor('Trắng Kem (Cream)', '#f5f5f4', this)" class="color-btn w-8 h-8 rounded-full bg-stone-200 border border-slate-300 hover:scale-105 transition" title="Trắng Kem"></button>
+                                    <button onclick="selectColor('Xanh Navy FTU', '#1e3a8a', this)" class="color-btn w-8 h-8 rounded-full bg-blue-900 hover:scale-105 transition" title="Xanh Navy"></button>
+                                    <button onclick="selectColor('Xanh Rêu (Forest)', '#065f46', this)" class="color-btn w-8 h-8 rounded-full bg-emerald-800 hover:scale-105 transition" title="Xanh Rêu"></button>
+                                </div>
+                            </div>
+
+                            <!-- Size Selector -->
+                            <div class="sm:col-span-4">
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Kích cỡ: <span id="selected-size-label" class="text-indigo-600">Size L</span></label>
+                                <div class="flex items-center gap-1.5">
+                                    <button onclick="selectSize('S')" id="size-btn-S" class="w-9 h-8 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 hover:border-indigo-500 transition">S</button>
+                                    <button onclick="selectSize('M')" id="size-btn-M" class="w-9 h-8 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 hover:border-indigo-500 transition">M</button>
+                                    <button onclick="selectSize('L')" id="size-btn-L" class="w-9 h-8 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-xs font-extrabold text-indigo-700 transition">L</button>
+                                    <button onclick="selectSize('XL')" id="size-btn-XL" class="w-9 h-8 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 hover:border-indigo-500 transition">XL</button>
+                                </div>
+                            </div>
+
+                            <!-- Quantity Selector -->
+                            <div class="sm:col-span-3">
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Số lượng:</label>
+                                <div class="flex items-center border border-slate-200 rounded-lg bg-slate-50 w-24 h-8">
+                                    <button onclick="changeQty(-1)" class="w-7 h-full text-slate-600 hover:text-slate-900 font-bold">-</button>
+                                    <input id="order-qty" type="text" value="1" readonly class="w-10 text-center bg-transparent text-xs font-bold text-slate-900 focus:outline-none">
+                                    <button onclick="changeQty(1)" class="w-7 h-full text-slate-600 hover:text-slate-900 font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive AI Virtual Fit Widget -->
+                    <div class="bg-indigo-50/70 rounded-2xl p-4 sm:p-5 border border-indigo-200/80 space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
+                                    <i class="fa-solid fa-ruler-combined"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-900">Công Cụ AI Ướm Thử Size Tự Động (Virtual Fit)</h4>
+                                    <p class="text-[11px] text-slate-600">Kéo thanh trượt chiều cao & cân nặng của bạn để AI tính độ vừa vặn</p>
+                                </div>
+                            </div>
+                            <button onclick="applyAISize()" class="text-[11px] font-bold bg-indigo-600 hover:bg-indigo-700 text-white px-2.5 py-1 rounded-lg shadow-sm transition">
+                                Áp dụng Size AI
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="bg-white p-2.5 rounded-xl border border-indigo-100">
+                                <label class="block text-[11px] font-semibold text-slate-500">Chiều cao: <span id="lbl-height" class="text-indigo-700 font-bold">178 cm</span></label>
+                                <input id="input-height" type="range" min="150" max="190" value="178" oninput="calculateAIFit()" class="w-full accent-indigo-600 mt-1 cursor-pointer">
+                            </div>
+                            <div class="bg-white p-2.5 rounded-xl border border-indigo-100">
+                                <label class="block text-[11px] font-semibold text-slate-500">Cân nặng: <span id="lbl-weight" class="text-indigo-700 font-bold">70 kg</span></label>
+                                <input id="input-weight" type="range" min="42" max="95" value="70" oninput="calculateAIFit()" class="w-full accent-indigo-600 mt-1 cursor-pointer">
+                            </div>
+                            <div class="bg-white p-2.5 rounded-xl border border-indigo-100">
+                                <label class="block text-[11px] font-semibold text-slate-500">Form mong muốn:</label>
+                                <select id="input-fit-pref" onchange="calculateAIFit()" class="w-full text-xs font-bold text-slate-800 bg-transparent mt-1 focus:outline-none">
+                                    <option value="regular">Vừa vặn tôn dáng (Regular)</option>
+                                    <option value="oversize">Rộng thoải mái (Boxy/Oversize)</option>
+                                    <option value="slim">Ôm gọn thể thao</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-3 border border-indigo-200 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div id="recommended-size-badge" class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-emerald-600 text-white font-extrabold text-lg flex items-center justify-center shadow-sm shrink-0">
+                                    L
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="text-xs font-bold text-slate-900">AI gợi ý: <span id="rec-size-text" class="text-indigo-600">Size L (Chuẩn Form)</span></span>
+                                        <span id="rec-confidence" class="text-[11px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Độ tương thích: 97%</span>
+                                    </div>
+                                    <p id="rec-detail-desc" class="text-xs text-slate-600 mt-0.5">Với 1m78 & 70kg: Rộng vai 48cm, dài áo 72cm vừa vặn phần ngực và vai, không bị cộc khi giơ tay.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Primary Purchase CTA Buttons -->
+                    <div class="pt-1 flex flex-col sm:flex-row gap-3">
+                        <button onclick="openCheckoutFlow('buy')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-shield-halved"></i> Mua Ngay An Toàn (Bảo vệ bởi Escrow)
+                        </button>
+                        <button onclick="openCheckoutFlow('fomo')" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3.5 px-5 rounded-2xl transition flex items-center justify-center gap-2 text-xs">
+                            <i class="fa-solid fa-scale-balanced text-amber-400"></i> Kiểm Tra Chống Mua Bốc Đồng (FOMO)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 2: 90-DAY PRICE TRACKER + AI REVIEW SHIELD + WRITE REVIEW-->
+        <!-- =============================================================== -->
+        <section id="sec-price-review" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left 5 Cols: 90-Day Price History Tracker -->
+            <div class="lg:col-span-5 bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 flex flex-col justify-between space-y-5">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Giải pháp #2A: Chống Sale Ảo</span>
+                        <span class="text-xs text-slate-400"><i class="fa-solid fa-clock-rotate-left mr-1"></i>Lịch sử 90 ngày</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Biểu Đồ Lịch Sử Giá Minh Bạch</h3>
+                    <p class="text-xs text-slate-500 mt-1">Bấm nút <strong>"Mô phỏng Sale Ảo"</strong> bên dưới để xem cách TrustCart phát hiện gian hàng lén tăng giá gốc gấp đôi trước ngày lễ rồi gắn mác giảm 50%.</p>
+                </div>
+
+                <!-- Interactive Period Selector -->
+                <div class="flex items-center justify-between bg-slate-50 p-2 rounded-xl border border-slate-200 text-xs">
+                    <span class="font-semibold text-slate-600 pl-2">Chế độ kiểm tra:</span>
+                    <div class="flex gap-1">
+                        <button onclick="updatePriceChart(90)" id="chart-btn-90" class="px-3 py-1.5 rounded-lg font-bold bg-indigo-600 text-white shadow-sm transition">Giá Minh Bạch (90 ngày)</button>
+                        <button onclick="updatePriceChart('fake')" id="chart-btn-fake" class="px-3 py-1.5 rounded-lg font-semibold text-rose-600 hover:bg-rose-50 transition">Mô phỏng Sale Ảo</button>
+                    </div>
+                </div>
+
+                <!-- SVG Chart Container -->
+                <div class="bg-slate-50/70 rounded-2xl p-4 border border-slate-200/80">
+                    <div id="price-chart-svg" class="w-full h-44">
+                        <!-- Rendered dynamically via JS -->
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 pt-3 mt-2 border-t border-slate-200/80 text-center">
+                        <div>
+                            <span class="text-[10px] uppercase text-slate-400 font-bold block">Cao nhất 90 ngày</span>
+                            <span id="price-stat-high" class="text-xs font-bold text-slate-700">340.000₫</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase text-slate-400 font-bold block">Giá trung bình</span>
+                            <span id="price-stat-avg" class="text-xs font-bold text-slate-700">325.000₫</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase text-slate-400 font-bold block">Giá hôm nay</span>
+                            <span id="price-stat-now" class="text-xs font-extrabold text-emerald-600">279.000₫ (Đáy)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Price Verdict Box -->
+                <div id="price-verdict-box" class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-start gap-3">
+                    <i id="price-verdict-icon" class="fa-solid fa-circle-check text-emerald-600 text-lg mt-0.5"></i>
+                    <div class="text-xs">
+                        <p id="price-verdict-title" class="font-bold text-emerald-900">Xác nhận: Khuyến mãi thật (-18% so với trung bình)</p>
+                        <p id="price-verdict-desc" class="text-emerald-700 mt-0.5 leading-relaxed">Sản phẩm giữ giá ổn định 330k–340k suốt 3 tháng qua. Mức giá 279.000₫ hiện tại là ưu đãi thực chất.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right 7 Cols: AI Fake Review Shield + Direct User Review Form -->
+            <div class="lg:col-span-7 bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 flex flex-col justify-between space-y-5">
+                <div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">Giải pháp #2B: AI Review Shield™ & Đánh Giá Thật</span>
+                        <button onclick="summarizeReviewsWithAI()" class="bg-gradient-to-r from-indigo-600 to-emerald-600 hover:opacity-95 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm transition">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Nhờ AI Tóm tắt Ưu / Nhược điểm
+                        </button>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Hệ Thống Lọc Đánh Giá Ảo & Tương Tác Cộng Đồng</h3>
+                    <p class="text-xs text-slate-500 mt-1">Mời giảng viên và các bạn viết thử bình luận bên dưới — Hệ thống sẽ tự động phân tích độ tin cậy và hiển thị ngay lập tức!</p>
+                </div>
+
+                <!-- AI Dynamic Review Summary Banner (Hidden until clicked or default shown) -->
+                <div id="ai-review-summary-box" class="bg-indigo-50/80 rounded-2xl p-3.5 border border-indigo-200/80 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-thumbs-up text-emerald-600 mt-0.5"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Ưu điểm nổi bật (AI tổng hợp):</span>
+                            <span id="ai-sum-pros" class="text-slate-600">Vải Cotton 250gsm dày dặn đứng form, cổ áo bo chắc không bị bai nhão sau khi giặt máy.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-exclamation text-amber-500 mt-0.5"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Điểm cần lưu ý thực tế:</span>
+                            <span id="ai-sum-cons" class="text-slate-600">Form Boxy hơi rộng ngang, nếu thích mặc ôm sát cơ thể nên lùi 1 size.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="flex flex-wrap gap-1.5">
+                    <button onclick="filterReviews('verified')" id="rev-btn-verified" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm transition">
+                        <i class="fa-solid fa-user-check mr-1"></i> Tất cả đánh giá thật (<span id="count-verified">4</span>)
+                    </button>
+                    <button onclick="filterReviews('after30days')" id="rev-btn-after30days" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        <i class="fa-solid fa-calendar-check mr-1 text-emerald-600"></i> Đánh giá sau 30 ngày
+                    </button>
+                    <button onclick="filterReviews('critical')" id="rev-btn-critical" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        <i class="fa-solid fa-scale-unbalanced mr-1 text-amber-600"></i> Góc nhìn 2-3 Sao
+                    </button>
+                    <button onclick="filterReviews('spam')" id="rev-btn-spam" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-50 text-ftu-red border border-rose-200 hover:bg-rose-100 transition">
+                        <i class="fa-solid fa-ban mr-1"></i> Spam/Seeding bị AI chặn (2)
+                    </button>
+                </div>
+
+                <!-- Review List Container -->
+                <div id="reviews-list-container" class="space-y-3 max-h-[270px] overflow-y-auto pr-1">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- LIVE INTERACTIVE REVIEW SUBMISSION FORM -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/90 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+                            <i class="fa-solid fa-pen-to-square text-indigo-600"></i> Viết đánh giá trực tiếp (Lưu thực tế trên trang)
+                        </h4>
+                        <span class="text-[11px] text-emerald-700 font-semibold"><i class="fa-solid fa-bolt mr-1"></i>AI kiểm duyệt tự động</span>
+                    </div>
+                    <form id="review-form" onsubmit="submitUserReview(event)" class="space-y-2.5">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            <input id="rev-input-name" type="text" required placeholder="Tên của bạn (VD: Minh Thư - FTU)" class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-medium focus:outline-none focus:border-indigo-500">
+                            <select id="rev-input-stars" class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-amber-600 focus:outline-none focus:border-indigo-500">
+                                <option value="5">★★★★★ (5 Sao - Tuyệt vời)</option>
+                                <option value="4">★★★★☆ (4 Sao - Hài lòng)</option>
+                                <option value="3">★★★☆☆ (3 Sao - Khách quan)</option>
+                                <option value="2">★★☆☆☆ (2 Sao - Cần cải thiện)</option>
+                            </select>
+                            <select id="rev-input-tag" class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-700 focus:outline-none focus:border-indigo-500">
+                                <option value="verified">Đã mua & Kiểm tra Cam thường</option>
+                                <option value="after30days">Đánh giá sau 30 ngày sử dụng</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input id="rev-input-content" type="text" required placeholder="Nhập nhận xét thực tế về chất vải, form áo hoặc dịch vụ giao hàng..." class="flex-1 px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs focus:outline-none focus:border-indigo-500">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shrink-0 flex items-center justify-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-paper-plane"></i> Gửi đánh giá
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- MODULE 3: PRIVACY-SHIELD SHIPPING LABEL & 1-CLICK ESCROW RETURN -->
+        <!-- =============================================================== -->
+        <section id="sec-logistics" class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold text-sm flex items-center justify-center">03</span>
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-bold text-slate-900">Giải pháp #3: Vận Đơn Ẩn Danh (PrivacyShield™) & Bảo Chứng Tiền (Escrow)</h2>
+                        <p class="text-xs text-slate-500">Khắc phục: <em>"Lộ SĐT bị kẻ gian giả danh Shipper lừa chuyển khoản & Thủ tục hoàn tiền rườm rà"</em></p>
+                    </div>
+                </div>
+                <span class="bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold px-3 py-1.5 rounded-full">
+                    <i class="fa-solid fa-shield-halved mr-1"></i> Chống lừa đảo giao nhận 100%
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left 6 Cols: Interactive Shipping Waybill Simulator -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Bản Xem Trước Phiếu Dán Bưu Phẩm</h3>
+                        <div class="bg-slate-100 p-1 rounded-xl flex border border-slate-200">
+                            <button id="lbl-btn-safe" onclick="setLabelMode('safe')" class="px-3 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm transition">
+                                <i class="fa-solid fa-user-shield mr-1"></i>Bật PrivacyShield (Ẩn danh)
+                            </button>
+                            <button id="lbl-btn-unsafe" onclick="setLabelMode('unsafe')" class="px-3 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-rose-600 transition">
+                                <i class="fa-solid fa-triangle-exclamation mr-1"></i>Tắt (Phiếu truyền thống)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Simulated Physical Shipping Box Label -->
+                    <div id="waybill-card" class="border-2 border-dashed border-emerald-500 bg-amber-50/30 rounded-2xl p-5 font-mono text-xs space-y-4 relative transition-all">
+                        <div class="flex items-center justify-between border-b border-slate-300 pb-3">
+                            <div>
+                                <span class="font-sans font-extrabold text-base text-slate-900">TRUST-EXPRESS VN</span>
+                                <span id="waybill-security-tag" class="ml-2 font-sans bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">ĐÃ MÃ HÓA SĐT</span>
+                            </div>
+                            <div class="text-right">
+                                <span id="wb-order-code" class="block font-bold text-slate-700">MĐH: #TC-883920-VN</span>
+                                <span class="text-[10px] text-slate-500">Trạm giao: Q. Bình Thạnh, TP.HCM</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+                            <div class="sm:col-span-2 space-y-2">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 uppercase block">Người nhận trên tem in:</span>
+                                    <p id="wb-name" class="font-bold text-sm text-slate-900">KHÁCH HÀNG TRUSTCART *** (Đã che tên)</p>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slate-400 uppercase block">Số điện thoại kết nối Shipper:</span>
+                                    <p id="wb-phone" class="font-bold text-sm text-emerald-700 bg-emerald-100 inline-block px-2 py-0.5 rounded border border-emerald-300">
+                                        1900-6868 (Mã định tuyến: #5509)
+                                    </p>
+                                    <span id="wb-phone-note" class="block text-[10px] text-slate-500 font-sans mt-0.5">
+                                        *Shipper bấm gọi trên App sẽ tự nối máy qua tổng đài ảo, tuyệt đối không lộ SĐT cá nhân.
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slate-400 uppercase block">Mô tả hàng hóa in ngoài hộp:</span>
+                                    <p id="wb-item" class="font-bold text-slate-800">Kiện hàng tiêu chuẩn #K250 (Đã ẩn tên sản phẩm để tránh tráo hàng)</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-3 rounded-xl border border-slate-300 text-center flex flex-col items-center justify-center">
+                                <i class="fa-solid fa-qrcode text-5xl text-slate-800"></i>
+                                <span class="font-sans text-[10px] font-bold text-indigo-700 mt-1.5">QR Xác Thực Shipper</span>
+                                <span class="font-sans text-[9px] text-slate-500">Chống lừa đảo đơn ảo</span>
+                            </div>
+                        </div>
+
+                        <div id="wb-warning-banner" class="font-sans bg-emerald-600 text-white p-2.5 rounded-xl text-xs font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-base"></i>
+                            <span>An toàn tuyệt đối: Kẻ gian nhặt vỏ hộp cũng không thể biết SĐT hay danh tính của bạn!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right 6 Cols: Interactive Escrow & 1-Click Return Simulator -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Quy Trình 4 Bước Giữ Tiền Bảo Vệ Người Mua (Escrow)</h3>
+                        <p class="text-xs text-slate-500 mt-1">Bấm vào từng bước để xem cơ chế chống quỵt tiền và hoàn tiền siêu tốc trong 2 giờ:</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button onclick="setEscrowStep(1)" id="escrow-btn-1" class="p-2.5 rounded-xl border text-left transition bg-indigo-600 text-white border-indigo-600 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase opacity-80 block">Bước 1</span>
+                            <span class="text-xs font-bold">Đóng băng tiền</span>
+                        </button>
+                        <button onclick="setEscrowStep(2)" id="escrow-btn-2" class="p-2.5 rounded-xl border text-left transition bg-slate-50 text-slate-700 border-slate-200 hover:bg-white">
+                            <span class="text-[10px] font-bold uppercase opacity-70 block">Bước 2</span>
+                            <span class="text-xs font-bold">Đồng kiểm Unbox</span>
+                        </button>
+                        <button onclick="setEscrowStep(3)" id="escrow-btn-3" class="p-2.5 rounded-xl border text-left transition bg-slate-50 text-slate-700 border-slate-200 hover:bg-white">
+                            <span class="text-[10px] font-bold uppercase opacity-70 block">Bước 3</span>
+                            <span class="text-xs font-bold">Đổi trả 1-Chạm</span>
+                        </button>
+                        <button onclick="setEscrowStep(4)" id="escrow-btn-4" class="p-2.5 rounded-xl border text-left transition bg-slate-50 text-slate-700 border-slate-200 hover:bg-white">
+                            <span class="text-[10px] font-bold uppercase opacity-70 block">Bước 4</span>
+                            <span class="text-xs font-bold">Hoàn tiền 2 Giờ</span>
+                        </button>
+                    </div>
+
+                    <div id="escrow-detail-card" class="bg-slate-50 rounded-2xl p-5 border border-slate-200 flex-1 flex flex-col justify-between space-y-4">
+                        <!-- Rendered via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 2: FTU ACADEMIC PRESENTATION DECK MODE                         -->
+    <!-- =================================================================== -->
+    <section id="view-presentation" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-ftu-dark rounded-3xl p-8 text-white shadow-xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="space-y-2">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Trường Đại học Ngoại Thương (FTU) • Học phần Thương mại Điện tử</span>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold">Báo Cáo Giải Pháp Tối Ưu Hóa Trải Nghiệm Người Tiêu Dùng</h1>
+                    <p class="text-sm text-indigo-100 max-w-3xl">Tổng hợp Ma trận Khó khăn Hiện hành – Giải pháp Công nghệ trên TrustCart VN – Chỉ số Đo lường Hiệu quả (KPIs).</p>
+                </div>
+                <div class="flex flex-wrap gap-2 shrink-0">
+                    <button onclick="resetDemoData()" class="bg-rose-600/80 hover:bg-rose-600 text-white font-bold px-4 py-3 rounded-2xl text-xs transition flex items-center gap-1.5 border border-rose-400/30">
+                        <i class="fa-solid fa-rotate"></i> Reset Dữ Liệu Mẫu
+                    </button>
+                    <button onclick="switchMainTab('prototype')" class="bg-white text-indigo-900 hover:bg-indigo-50 font-extrabold px-5 py-3 rounded-2xl text-xs shadow-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Quay lại Web Tương tác
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impact Metrics KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <span class="text-xs font-bold text-slate-400 uppercase">Tỷ lệ hoàn hàng do sai kích cỡ</span>
+                <p class="text-3xl font-extrabold text-emerald-600 mt-1">-45%</p>
+                <p class="text-xs text-slate-500 mt-1">Nhờ <strong>AI Virtual Fit</strong> tính toán theo chiều cao/cân nặng & Ảnh Cam thường.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <span class="text-xs font-bold text-slate-400 uppercase">Chỉ số Niềm tin Khách hàng (CSAT)</span>
+                <p class="text-3xl font-extrabold text-indigo-600 mt-1">+58%</p>
+                <p class="text-xs text-slate-500 mt-1">Nhờ minh bạch <strong>Lịch sử giá 90 ngày</strong> và bộ lọc <strong>AI chặn Seeding</strong>.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <span class="text-xs font-bold text-slate-400 uppercase">Rủi ro lộ SĐT & Shipper giả danh</span>
+                <p class="text-3xl font-extrabold text-amber-500 mt-1">-98%</p>
+                <p class="text-xs text-slate-500 mt-1">Nhờ vận đơn ẩn danh <strong>PrivacyShield</strong> mã hóa số điện thoại thành số tổng đài ảo.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <span class="text-xs font-bold text-slate-400 uppercase">Thời gian hoàn tiền khiếu nại</span>
+                <p class="text-3xl font-extrabold text-ftu-red mt-1">2 Giờ</p>
+                <p class="text-xs text-slate-500 mt-1">Rút ngắn từ 7 ngày xuống 2 giờ nhờ <strong>Escrow & Đổi trả 1-Chạm</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Structured Matrix Table -->
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+                <h2 class="text-lg font-bold text-slate-900"><i class="fa-solid fa-table-list text-indigo-600 mr-2"></i>Ma Trận Đối Chiếu: 5 Khó Khăn Hiện Hành & Giải Pháp Trên TrustCart VN</h2>
+                <span class="text-xs text-slate-500">Bấm vào nút bên phải để demo trực tiếp</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase text-[11px]">
+                            <th class="py-3.5 px-4 font-bold">Khó khăn của Người tiêu dùng</th>
+                            <th class="py-3.5 px-4 font-bold">Thực trạng trên các sàn hiện nay</th>
+                            <th class="py-3.5 px-4 font-bold">Giải pháp Công nghệ trên TrustCart VN</th>
+                            <th class="py-3.5 px-4 font-bold text-center">Demo</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="hover:bg-slate-50/80">
+                            <td class="py-4 px-4 font-bold text-slate-900">1. Hình ảnh ảo & Chọn sai kích cỡ</td>
+                            <td class="py-4 px-4 text-slate-600">Ảnh chỉnh sửa quá đà, không rõ chất vải dày hay mỏng; bảng size chung chung.</td>
+                            <td class="py-4 px-4 text-indigo-700 font-medium">Chế độ xem <strong>Cam Thường Tại Kho + Macro 10x</strong> soi vải Cotton 250gsm & <strong>AI Virtual Fit</strong>.</td>
+                            <td class="py-4 px-4 text-center">
+                                <button onclick="jumpFromPresentation('sec-product')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3 py-1.5 rounded-lg text-xs">Mở Module 1</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80">
+                            <td class="py-4 px-4 font-bold text-slate-900">2. Đánh giá 5 sao giả mạo (Seeding)</td>
+                            <td class="py-4 px-4 text-slate-600">Thuê người tạo đơn ảo, bình luận văn mẫu nhận xu làm nhiễu thông tin.</td>
+                            <td class="py-4 px-4 text-emerald-700 font-medium"><strong>AI Review Shield:</strong> Chặn spam trùng IP, tóm tắt ưu/nhược điểm bằng AI & cho phép viết đánh giá thật.</td>
+                            <td class="py-4 px-4 text-center">
+                                <button onclick="jumpFromPresentation('sec-price-review')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-3 py-1.5 rounded-lg text-xs">Mở Module 2</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80">
+                            <td class="py-4 px-4 font-bold text-slate-900">3. Sale ảo & Bẫy tâm lý FOMO</td>
+                            <td class="py-4 px-4 text-slate-600">Tăng giá gốc gấp đôi trước ngày sale rồi giảm 50%; ép mua vội vàng.</td>
+                            <td class="py-4 px-4 text-amber-700 font-medium"><strong>Biểu đồ giá 90 ngày</strong> minh bạch + <strong>Anti-FOMO Guard</strong> cho phép khóa giữ giá ưu đãi 24h.</td>
+                            <td class="py-4 px-4 text-center">
+                                <button onclick="openCheckoutFlow('fomo')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold px-3 py-1.5 rounded-lg text-xs">Mở Anti-FOMO</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80">
+                            <td class="py-4 px-4 font-bold text-slate-900">4. Lộ SĐT & Shipper giả mạo lừa tiền</td>
+                            <td class="py-4 px-4 text-slate-600">In công khai SĐT và tên hàng đắt tiền trên hộp bưu phẩm gây rò rỉ dữ liệu.</td>
+                            <td class="py-4 px-4 text-indigo-700 font-medium"><strong>Phiếu gửi hàng PrivacyShield:</strong> Thay SĐT thật bằng SĐT ảo tổng đài & che tên sản phẩm.</td>
+                            <td class="py-4 px-4 text-center">
+                                <button onclick="jumpFromPresentation('sec-logistics')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3 py-1.5 rounded-lg text-xs">Mở Module 3</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80">
+                            <td class="py-4 px-4 font-bold text-slate-900">5. Thiếu tư vấn trung thực & Đổi trả khó</td>
+                            <td class="py-4 px-4 text-slate-600">Chatbot trả lời máy móc; thủ tục hoàn tiền mất 5-7 ngày chờ đợi.</td>
+                            <td class="py-4 px-4 text-ftu-red font-medium"><strong>Trợ lý AI Consumer Advocate</strong> (Gemini API) tư vấn thật lòng + <strong>Đổi trả 1-Chạm</strong> hoàn tiền 2h.</td>
+                            <td class="py-4 px-4 text-center">
+                                <button onclick="toggleAIChat(true)" class="bg-rose-50 hover:bg-rose-100 text-ftu-red font-bold px-3 py-1.5 rounded-lg text-xs">Mở Chat AI</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 1: REALISTIC CHECKOUT + ANTI-FOMO GUARD                       -->
+    <!-- =================================================================== -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-7 shadow-2xl border border-slate-200 space-y-5 my-8">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-shield-heart text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-extrabold text-slate-900">Thanh Toán An Toàn & Bảo Vệ Người Mua (Escrow + PrivacyShield)</h3>
+                        <p class="text-[11px] text-slate-500">Đơn hàng thực tế sẽ được lưu vào mục "Đơn hàng" trên trình duyệt của bạn</p>
+                    </div>
+                </div>
+                <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Selected Item Summary -->
+            <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-shirt"></i>
+                    </div>
+                    <div>
+                        <h4 id="chk-prod-name" class="text-xs font-bold text-slate-900">Áo Thun Boxy Heavyweight Cotton 250gsm</h4>
+                        <p id="chk-prod-variant" class="text-[11px] text-slate-500">Phân loại: Đen Than (Charcoal) • Size L • SL: 1</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span id="chk-prod-total" class="text-sm font-extrabold text-indigo-600">279.000₫</span>
+                    <span class="block text-[10px] text-emerald-600 font-bold">Miễn phí vận chuyển</span>
+                </div>
+            </div>
+
+            <!-- Anti-FOMO Guard Box -->
+            <div class="bg-amber-50/70 p-4 rounded-2xl border border-amber-200/90 space-y-2.5">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-amber-900 flex items-center gap-1.5">
+                        <i class="fa-solid fa-brain text-amber-600"></i> Lớp bảo vệ Anti-FOMO (Chống mua sắm bốc đồng):
+                    </span>
+                    <button type="button" onclick="activateCoolingOff()" class="text-[11px] bg-white hover:bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-lg border border-amber-300 transition">
+                        <i class="fa-regular fa-hourglass-half mr-1"></i>Khóa giữ giá ưu đãi 24h để nghĩ thêm
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+                    <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-amber-200 cursor-pointer">
+                        <input type="checkbox" checked onchange="updateFomoScore()" class="fomo-check accent-emerald-600 rounded">
+                        <span>Mua vì nhu cầu thực tế</span>
+                    </label>
+                    <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-amber-200 cursor-pointer">
+                        <input type="checkbox" checked onchange="updateFomoScore()" class="fomo-check accent-emerald-600 rounded">
+                        <span>Đã xem ảnh Cam thường</span>
+                    </label>
+                    <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-amber-200 cursor-pointer">
+                        <input type="checkbox" checked onchange="updateFomoScore()" class="fomo-check accent-emerald-600 rounded">
+                        <span>Trong ngân sách tháng</span>
+                    </label>
+                </div>
+                <p id="fomo-advice-box" class="text-[11px] text-emerald-700 font-semibold">
+                    <i class="fa-solid fa-circle-check mr-1"></i>3/3 tiêu chí tỉnh táo: Quyết định mua sắm hoàn toàn hợp lý!
+                </p>
+            </div>
+
+            <!-- Customer Shipping & Privacy Encryption Form -->
+            <form id="checkout-form" onsubmit="submitRealOrder(event)" class="space-y-3.5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Họ và tên người nhận *</label>
+                        <input id="chk-input-name" type="text" required placeholder="VD: Võ Đức Chí Công" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại (Sẽ được mã hóa số ảo) *</label>
+                        <input id="chk-input-phone" type="tel" required placeholder="VD: 0912345678" oninput="previewVirtualPhone(this.value)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-indigo-600">
+                        <span id="virtual-phone-preview" class="block text-[10px] text-emerald-600 font-semibold mt-1">
+                            <i class="fa-solid fa-lock mr-1"></i>In trên hộp hàng: 1900-6868 (Nhánh ảo #8821)
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Địa chỉ nhận hàng *</label>
+                    <input id="chk-input-address" type="text" required placeholder="VD: Số 15 Đường D5, Phường 25, Quận Bình Thạnh, TP.HCM" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-indigo-600">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Phương thức thanh toán bảo vệ người mua:</label>
+                    <select id="chk-input-payment" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-indigo-600">
+                        <option value="Ví Тạm Giữ Escrow (Chỉ giải ngân cho Shop khi bạn hài lòng)">Ví Tạm Giữ Escrow (Đóng băng tiền bảo vệ người mua 15 ngày)</option>
+                        <option value="COD Đồng Kiểm (Mở hộp kiểm tra Cam thường rồi mới thanh toán)">COD Đồng Kiểm (Được mở hộp kiểm tra chất vải tại chỗ)</option>
+                    </select>
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check-double"></i> Xác Nhận Đặt Hàng & Tạo Mã Vận Đơn Ẩn Danh
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 2: MY ORDERS & 1-CLICK INSTANT RETURN                         -->
+    <!-- =================================================================== -->
+    <div id="orders-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-7 shadow-2xl border border-slate-200 space-y-5 my-8">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                        <i class="fa-solid fa-box-open text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-extrabold text-slate-900">Quản Lý Đơn Hàng & Đổi Trả 1-Chạm (Escrow)</h3>
+                        <p class="text-[11px] text-slate-500">Bấm thử "Yêu cầu Đổi trả 1-Chạm" để trải nghiệm hoàn tiền tự động trong 2 giờ</p>
+                    </div>
+                </div>
+                <button onclick="toggleOrdersModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="orders-list-container" class="space-y-3 max-h-[380px] overflow-y-auto pr-1">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- FLOATING AI CONSUMER ADVOCATE CHATBOT (GEMINI API + SMART FALLBACK) -->
+    <!-- =================================================================== -->
+    <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end">
+        <!-- Chat Window -->
+        <div id="ai-chat-window" class="hidden w-[350px] sm:w-[390px] bg-white rounded-3xl shadow-2xl border border-slate-200/90 overflow-hidden mb-3 flex flex-col transition-all">
+            <!-- Chat Header -->
+            <div class="bg-gradient-to-r from-indigo-700 via-indigo-600 to-emerald-600 p-4 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <i class="fa-solid fa-robot text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <h4 class="text-xs font-extrabold">AI Bảo Vệ Người Tiêu Dùng</h4>
+                            <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+                        </div>
+                        <p class="text-[10px] text-indigo-100">Tư vấn trung thực • Không chốt đơn bất chấp</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="toggleApiKeyConfig()" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-xs" title="Cài đặt Gemini API Key tùy chọn">
+                        <i class="fa-solid fa-key"></i>
+                    </button>
+                    <button onclick="toggleAIChat(false)" class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Optional API Key Input Drawer -->
+            <div id="api-key-drawer" class="hidden bg-slate-900 text-white p-3 text-xs space-y-2 border-b border-slate-700">
+                <p class="text-[11px] text-slate-300">Nhập Gemini API Key cá nhân (từ <code class="text-amber-300">aistudio.google.com</code>) nếu bạn chạy trên domain riêng:</p>
+                <div class="flex gap-1.5">
+                    <input id="custom-gemini-key" type="password" placeholder="AIzaSy..." class="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-white focus:outline-none">
+                    <button onclick="saveCustomApiKey()" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-lg font-bold text-xs">Lưu</button>
+                </div>
+            </div>
+
+            <!-- Quick Prompt Pills -->
+            <div class="bg-slate-50 px-3 py-2 border-b border-slate-200 flex gap-1.5 overflow-x-auto no-scrollbar">
+                <button onclick="sendQuickPrompt('Mình cao 1m78 nặng 70kg mặc size gì vừa đẹp?')" class="shrink-0 text-[11px] bg-white hover:bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-full font-semibold transition">
+                    📏 Cao 1m78 nặng 70kg mặc size gì?
+                </button>
+                <button onclick="sendQuickPrompt('Áo Cotton 250gsm này mặc chạy bộ ở TP.HCM có nóng không?')" class="shrink-0 text-[11px] bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-semibold transition">
+                    🏃 Mặc chạy bộ ở TP.HCM có nóng không?
+                </button>
+                <button onclick="sendQuickPrompt('Làm sao để không bị lộ số điện thoại khi giao hàng?')" class="shrink-0 text-[11px] bg-white hover:bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded-full font-semibold transition">
+                    🔒 Chống lộ SĐT Shipper?
+                </button>
+            </div>
+
+            <!-- Chat Messages Area -->
+            <div id="ai-chat-messages" class="p-4 space-y-3 h-72 overflow-y-auto bg-slate-50/50 text-xs">
+                <div class="flex items-start gap-2.5">
+                    <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-shield-heart text-xs"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-slate-700 leading-relaxed">
+                        Xin chào! Mình là <strong>AI Consumer Advocate</strong> của TrustCart VN. Mình được lập trình để <strong>bảo vệ quyền lợi người mua</strong>: tư vấn đúng size, nói rõ nhược điểm sản phẩm nếu không hợp nhu cầu của bạn, và giải thích cơ chế giữ tiền Escrow. Bạn cần mình kiểm tra gì nào?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Form -->
+            <form onsubmit="handleChatSubmit(event)" class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+                <input id="ai-chat-input" type="text" placeholder="Hỏi về size, chất vải, giá 90 ngày, đổi trả..." class="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-100 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500">
+                <button type="submit" class="w-9 h-9 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shadow-sm transition shrink-0">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Floating Launcher Button -->
+        <button onclick="toggleAIChat()" class="animate-float bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 text-white font-bold px-4 py-3 rounded-full shadow-xl flex items-center gap-2.5 border-2 border-white transition">
+            <div class="relative">
+                <i class="fa-solid fa-robot text-lg"></i>
+                <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-300 rounded-full border border-indigo-700"></span>
+            </div>
+            <span class="text-xs pr-1">Chat AI Tư Vấn Minh Bạch</span>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 px-4 mt-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-ftu-red text-white flex items-center justify-center font-extrabold">FTU</div>
+                <div>
+                    <p class="text-white font-bold">Đồ Án Học Phần Thương Mại Điện Tử - Trường Đại học Ngoại Thương</p>
+                    <p class="text-slate-400">Nền tảng mẫu: TrustCart VN – Giải quyết 5 nỗi đau của người tiêu dùng trực tuyến</p>
+                </div>
+            </div>
+            <div class="text-center sm:text-right">
+                <p class="text-slate-300 font-medium">Tích hợp Lưu trữ Đơn hàng, Đánh giá thực tế & Gemini AI</p>
+                <p class="text-[11px] text-slate-500">Sẵn sàng triển khai lên GitHub & Vercel</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =================================================================== -->
+    <!-- APPLICATION JAVASCRIPT & GEMINI AI INTEGRATION                      -->
+    <!-- =================================================================== -->
+    <script>
+        // 1. STATE & PRODUCT CATALOG
+        let currentProduct = 'fashion';
+        let currentVisualMode = 'studio';
+        let currentReviewFilter = 'verified';
+        let selectedColorName = 'Đen Than (Charcoal)';
+        let selectedColorHex = '#1e293b';
+        let selectedSize = 'L';
+        let currentQty = 1;
+        let aiRecommendedSize = 'L';
+
+        const productCatalog = {
+            fashion: {
+                id: 'TC-FTU-250',
+                title: 'Áo Thun Boxy Heavyweight Cotton Compact 250gsm - Chuẩn Form Đứng Không Xù Lông',
+                priceNum: 279000,
+                priceCurrent: '279.000₫',
+                priceOld: '340.000₫',
+                priceAvg: '325.000₫',
+                priceFakeHigh: '680.000₫',
+                rating: '4.9/5.0',
+                specLabel2: 'Định lượng vải thực tế',
+                specVal2: 'Cotton Compact 250 GSM',
+                colorDiff: '±2% (Ánh sáng tự nhiên)'
+            },
+            blazer: {
+                id: 'TC-FTU-BLZ',
+                title: 'Áo Khoác Blazer Hàn Quốc 2 Lớp Cao Cấp - Phiên Bản Thuyết Trình Sinh Viên FTU',
+                priceNum: 459000,
+                priceCurrent: '459.000₫',
+                priceOld: '560.000₫',
+                priceAvg: '535.000₫',
+                priceFakeHigh: '890.000₫',
+                rating: '4.8/5.0',
+                specLabel2: 'Định lượng vải thực tế',
+                specVal2: 'Tuyết Mưa 320 GSM + Lót Lụa',
+                colorDiff: '±3% (Ánh sáng tự nhiên)'
+            }
+        };
+
+        const defaultReviews = [
+            {
+                id: 101,
+                type: 'verified',
+                author: 'Trần Khánh Linh (K64 FTU)',
+                badge: 'Đã mua & Xác thực Đơn hàng thật',
+                stars: 5,
+                daysUsed: 'Đã dùng 14 ngày',
+                content: 'Mình dùng thanh trượt AI trên web gợi ý size L, nhận hàng mặc vừa in phần vai! Vải Cotton 250gsm sờ dày tay đúng như ảnh chụp cam thường tại kho.',
+                helpful: 48,
+                aiNote: 'AI chấm điểm tin cậy: 99/100 (Khớp mã vận đơn thực tế)'
+            },
+            {
+                id: 102,
+                type: 'after30days',
+                author: 'Phạm Minh Tuấn',
+                badge: 'Đánh giá sau 30 ngày giặt máy',
+                stars: 5,
+                daysUsed: 'Đã dùng 35 ngày',
+                content: 'Cập nhật sau 1 tháng mặc đi học và giặt máy 6 lần: Cổ áo bo gân dày nên không hề bị dão hay xù lông. Phiếu giao hàng che kín SĐT nên không còn bị cuộc gọi rác làm phiền.',
+                helpful: 64,
+                aiNote: 'Đánh giá kiểm chứng độ bền dài hạn sau 30 ngày.'
+            },
+            {
+                id: 103,
+                type: 'critical',
+                author: 'Nguyễn Thu Hà',
+                badge: 'Góc nhìn khách quan • Đã mua hàng',
+                stars: 3,
+                daysUsed: 'Đã dùng 5 ngày',
+                content: 'Chất vải rất dày và đứng form nên mặc đi học phòng máy lạnh hoặc đi dạo mát thì tuyệt vời, nhưng nếu bạn nào định mặc chạy bộ buổi trưa nắng sẽ hơi dày quá nhé.',
+                helpful: 52,
+                aiNote: 'AI ưu tiên hiển thị bình luận 3 sao khách quan để người mua chọn đúng nhu cầu.'
+            },
+            {
+                id: 104,
+                type: 'spam',
+                author: 'clone_seeding_9921',
+                badge: 'ĐÃ BỊ AI CHẶN - Seeding văn mẫu nhận xu',
+                stars: 5,
+                daysUsed: 'Bình luận 1 phút sau khi đặt',
+                content: 'Hình ảnh mang tính chất nhận xu sản phẩm tuyệt vời lắm mọi người ơi chúc shop bán đắt hàng 10 điểm không có nhưng!',
+                helpful: 0,
+                aiNote: 'Lý do AI ẩn: Văn mẫu nhận xu vô nghĩa + Trùng IP với 15 tài khoản ảo.'
+            },
+            {
+                id: 105,
+                type: 'spam',
+                author: 'auto_bot_review88',
+                badge: 'ĐÃ BỊ AI CHẶN - Đơn hàng ảo 0đ',
+                stars: 5,
+                daysUsed: 'Không có lịch sử giao vận',
+                content: 'Giao hàng siêu nhanh đóng gói cẩn thận chất lượng vượt tầm giá sẽ ủng hộ shop dài lâu.',
+                helpful: 0,
+                aiNote: 'Lý do AI ẩn: Bưu kiện trọng lượng 0g (Tạo lượt bán ảo).'
+            }
+        ];
+
+        const defaultOrders = [
+            {
+                orderCode: '#TC-883920-VN',
+                productName: 'Áo Thun Boxy Heavyweight Cotton 250gsm',
+                variant: 'Đen Than (Charcoal) • Size L • SL: 1',
+                total: '279.000₫',
+                customerName: 'Khách hàng Mẫu FTU',
+                virtualPhone: '1900-6868 (Nhánh ảo #5509)',
+                payment: 'Ví Tạm Giữ Escrow (Đang bảo vệ tiền)',
+                status: 'Đang giữ tiền bảo vệ người mua (Escrow)',
+                time: 'Hôm nay'
+            }
+        ];
+
+        // Load from LocalStorage or initialize
+        let reviewsList = JSON.parse(localStorage.getItem('trustcart_reviews_v3')) || defaultReviews;
+        let ordersList = JSON.parse(localStorage.getItem('trustcart_orders_v3')) || defaultOrders;
+
+        const escrowStepsData = {
+            1: {
+                title: 'Bước 1: Đóng Băng Tiền Thanh Toán Trong Ví Trung Gian (Escrow)',
+                desc: 'Khi bạn đặt hàng, tiền của bạn KHÔNG chuyển ngay cho người bán mà được giữ an toàn tại Quỹ Bảo Chứng TrustCart VN trong 15 ngày. Người bán không thể nhận tiền nếu giao hàng giả hoặc sai mô tả.',
+                badge: 'Chống lừa đảo thanh toán 100%',
+                icon: 'fa-vault'
+            },
+            2: {
+                title: 'Bước 2: Quyền Đồng Kiểm & Quay Video Unbox Đóng Dấu Thời Gian',
+                desc: 'Bạn được mở hộp kiểm tra trực tiếp cùng Shipper đối chiếu với "Ảnh Cam thường" trên web. Ứng dụng hỗ trợ quay video mở hộp tự động gắn mã đơn để làm bằng chứng tức thì.',
+                badge: 'Đồng kiểm minh bạch tại chỗ',
+                icon: 'fa-box-open'
+            },
+            3: {
+                title: 'Bước 3: Kích Hoạt Đổi Trả 1-Chạm Ngay Trong Mục Đơn Hàng',
+                desc: 'Nếu không ưng ý, bạn chỉ cần mở mục "Đơn hàng" trên thanh công cụ và bấm nút "Yêu cầu Đổi trả 1-Chạm". Bưu tá sẽ tới tận nhà lấy lại hàng miễn phí 0đ mà không cần tranh luận với shop.',
+                badge: 'Thu hồi tận nhà miễn phí 0₫',
+                icon: 'fa-truck-ramp-box'
+            },
+            4: {
+                title: 'Bước 4: Hoàn Tiền Tự Động Trong 2 Giờ Ngay Khi Bưu Tá Nhận Hàng',
+                desc: 'Ngay khi Bưu tá quét mã nhận lại kiện hàng tại cửa nhà bạn, hệ thống Escrow lập tức hoàn trả 100% tiền về tài khoản của bạn trong vòng 2 giờ mà không cần chờ hàng quay về kho người bán.',
+                badge: 'Hoàn tiền siêu tốc 2 giờ',
+                icon: 'fa-money-bill-transfer'
+            }
+        };
+
+        // 2. TOAST & NAVIGATION HELPERS
+        function showToast(title, msg) {
+            const toast = document.getElementById('toast-container');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('hidden');
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => toast.classList.add('hidden'), 4500);
+        }
+
+        function hideToast() {
+            document.getElementById('toast-container').classList.add('hidden');
+        }
+
+        function switchMainTab(tab) {
+            const protoView = document.getElementById('view-prototype');
+            const presView = document.getElementById('view-presentation');
+            const btnProto = document.getElementById('tab-btn-prototype');
+            const btnPres = document.getElementById('tab-btn-presentation');
+
+            if (tab === 'presentation') {
+                protoView.classList.add('hidden');
+                presView.classList.remove('hidden');
+                btnPres.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-ftu-red shadow-sm transition';
+                btnProto.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 transition';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                presView.classList.add('hidden');
+                protoView.classList.remove('hidden');
+                btnProto.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition';
+                btnPres.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 transition';
+            }
+        }
+
+        function jumpFromPresentation(sectionId) {
+            switchMainTab('prototype');
+            setTimeout(() => scrollToSection(sectionId), 150);
+        }
+
+        function scrollToSection(id) {
+            switchMainTab('prototype');
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                el.classList.add('ring-4', 'ring-indigo-500/30');
+                setTimeout(() => el.classList.remove('ring-4', 'ring-indigo-500/30'), 1600);
+            }
+        }
+
+        function highlightSolution(sectionId, msg) {
+            scrollToSection(sectionId);
+            showToast('Điều hướng Giải pháp', msg);
+        }
+
+        // 3. PRODUCT, COLOR, SIZE, QUANTITY & VISUAL MODES
+        function selectProduct(prodKey) {
+            currentProduct = prodKey;
+            const data = productCatalog[prodKey];
+            document.getElementById('prod-btn-fashion').className = prodKey === 'fashion'
+                ? 'px-3 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-900 shadow-sm flex items-center justify-center gap-2 transition'
+                : 'px-3 py-2.5 rounded-xl text-xs font-bold bg-white/10 text-white hover:bg-white/20 flex items-center justify-center gap-2 transition';
+            document.getElementById('prod-btn-blazer').className = prodKey === 'blazer'
+                ? 'px-3 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-900 shadow-sm flex items-center justify-center gap-2 transition'
+                : 'px-3 py-2.5 rounded-xl text-xs font-bold bg-white/10 text-white hover:bg-white/20 flex items-center justify-center gap-2 transition';
+
+            document.getElementById('prod-title').textContent = data.title;
+            document.getElementById('prod-price-current').textContent = data.priceCurrent;
+            document.getElementById('prod-price-old').textContent = data.priceOld;
+            document.getElementById('prod-rating').textContent = data.rating;
+            document.getElementById('spec-label-2').textContent = data.specLabel2;
+            document.getElementById('spec-val-2').textContent = data.specVal2;
+            document.getElementById('spec-color-diff').textContent = data.colorDiff;
+
+            renderVisualShowcase();
+            updatePriceChart(90);
+            showToast('Đã chuyển sản phẩm', `Đang hiển thị: ${data.title}`);
+        }
+
+        function selectColor(colorName, hexCode, btnEl) {
+            selectedColorName = colorName;
+            selectedColorHex = hexCode;
+            document.getElementById('selected-color-label').textContent = colorName;
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('ring-2', 'ring-offset-2', 'ring-indigo-600'));
+            btnEl.classList.add('ring-2', 'ring-offset-2', 'ring-indigo-600');
+            renderVisualShowcase();
+        }
+
+        function selectSize(sz) {
+            selectedSize = sz;
+            document.getElementById('selected-size-label').textContent = `Size ${sz}`;
+            ['S', 'M', 'L', 'XL'].forEach(s => {
+                const btn = document.getElementById(`size-btn-${s}`);
+                if (s === sz) {
+                    btn.className = 'w-9 h-8 rounded-lg border-2 border-indigo-600 bg-indigo-50 text-xs font-extrabold text-indigo-700 transition';
+                } else {
+                    btn.className = 'w-9 h-8 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 hover:border-indigo-500 transition';
+                }
+            });
+        }
+
+        function changeQty(delta) {
+            currentQty = Math.max(1, Math.min(10, currentQty + delta));
+            document.getElementById('order-qty').value = currentQty;
+        }
+
+        function setVisualMode(mode) {
+            currentVisualMode = mode;
+            ['studio', 'raw', 'micro'].forEach(m => {
+                const btn = document.getElementById(`view-btn-${m}`);
+                btn.className = m === mode
+                    ? 'flex-1 py-2 px-2.5 rounded-xl text-xs font-bold bg-white text-slate-900 shadow-sm transition flex items-center justify-center gap-1.5'
+                    : 'flex-1 py-2 px-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
+            });
+            renderVisualShowcase();
+        }
+
+        function renderVisualShowcase() {
+            const box = document.getElementById('visual-display-box');
+            const badgeLeft = document.getElementById('visual-badge-left');
+            const badgeRight = document.getElementById('visual-badge-right');
+            const container = document.getElementById('visual-svg-container');
+            const strokeColor = selectedColorHex === '#f5f5f4' ? '#94a3b8' : '#0f172a';
+
+            if (currentVisualMode === 'studio') {
+                box.className = 'relative rounded-2xl overflow-hidden border border-slate-200 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 min-h-[380px] flex flex-col justify-between p-6 transition-all';
+                badgeLeft.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles text-indigo-400"></i> Ảnh Studio Ánh Sáng Chuẩn';
+                badgeRight.textContent = 'Độ tương đồng thực tế: 98.2%';
+                badgeRight.className = 'bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm';
+            } else if (currentVisualMode === 'raw') {
+                box.className = 'relative rounded-2xl overflow-hidden border-2 border-emerald-500 bg-stone-200 cam-thuong-grain min-h-[380px] flex flex-col justify-between p-6 transition-all';
+                badgeLeft.innerHTML = '<i class="fa-solid fa-mobile-screen text-emerald-400"></i> Ảnh Cam Thường Tại Kho (Không Filter)';
+                badgeRight.textContent = 'Quay trực tiếp bằng iPhone 13 tại kho';
+                badgeRight.className = 'bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm';
+            } else {
+                box.className = 'relative rounded-2xl overflow-hidden border-2 border-ftu-red bg-slate-900 text-white min-h-[380px] flex flex-col justify-between p-6 transition-all';
+                badgeLeft.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus text-rose-400"></i> Soi Cận Cảnh Macro 10x Sợi Vải Cotton 250gsm';
+                badgeRight.textContent = 'Dệt Compact 2 chiều • Không xù lông';
+                badgeRight.className = 'bg-ftu-red text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm';
+            }
+
+            if (currentVisualMode === 'micro') {
+                container.innerHTML = `
+                    <div class="w-44 h-44 rounded-full border-4 border-emerald-400 overflow-hidden flex items-center justify-center bg-slate-800 shadow-inner relative">
+                        <svg class="w-full h-full opacity-90" viewBox="0 0 100 100">
+                            <defs>
+                                <pattern id="cottonWeave" width="8" height="8" patternUnits="userSpaceOnUse">
+                                    <path d="M 8 0 L 0 0 0 8" fill="none" stroke="${selectedColorHex === '#f5f5f4' ? '#e2e8f0' : '#94a3b8'}" stroke-width="2.5"/>
+                                    <path d="M 0 4 L 8 4 M 4 0 L 4 8" fill="none" stroke="#64748b" stroke-width="1.5"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100" height="100" fill="url(#cottonWeave)" />
+                        </svg>
+                        <span class="absolute bottom-3 bg-slate-900/90 text-emerald-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Mật độ 250g/m²</span>
+                    </div>
+                    <span class="mt-3 text-xs font-medium text-slate-300">Sợi Cotton Compact chải kỹ giúp bề mặt đanh mịn, thoáng khí và giữ form cổ áo</span>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="relative">
+                        <svg class="w-44 h-44 drop-shadow-md transition-all" viewBox="0 0 120 120" fill="none">
+                            <path d="M32 22 L46 16 C52 24, 68 24, 74 16 L88 22 L106 42 L92 56 L82 44 L82 102 L38 102 L38 44 L28 56 L14 42 Z" fill="${selectedColorHex}" stroke="${strokeColor}" stroke-width="2.5"/>
+                            <path d="M46 16 C52 26, 68 26, 74 16" stroke="${strokeColor}" stroke-width="3.5" fill="none"/>
+                        </svg>
+                        ${currentVisualMode === 'raw' ? '<span class="absolute -bottom-2 right-0 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">Ánh sáng đèn huỳnh quang kho hàng</span>' : ''}
+                    </div>
+                    <span class="mt-4 text-xs font-bold text-slate-800 bg-white/90 px-3.5 py-1 rounded-full border border-slate-300 shadow-sm">
+                        ${selectedColorName} • Đang chọn: Size ${selectedSize}
+                    </span>
+                `;
+            }
+        }
+
+        // 4. AI VIRTUAL FIT CALCULATOR
+        function calculateAIFit() {
+            const h = parseInt(document.getElementById('input-height').value, 10);
+            const w = parseInt(document.getElementById('input-weight').value, 10);
+            const pref = document.getElementById('input-fit-pref').value;
+
+            document.getElementById('lbl-height').textContent = `${h} cm`;
+            document.getElementById('lbl-weight').textContent = `${w} kg`;
+
+            let size = 'L';
+            let desc = `Với ${h}cm & ${w}kg: Rộng vai 48cm, dài áo 72cm vừa vặn phần ngực và vai, cử động thoải mái.`;
+            let conf = '97%';
+
+            if (h < 163 && w < 54) {
+                size = 'S';
+                desc = `Với ${h}cm & ${w}kg: Size S giúp áo gọn gàng, chiều dài 66cm không bị trùm quá hông.`;
+                conf = '96%';
+            } else if (h < 172 && w < 64) {
+                size = 'M';
+                desc = `Với ${h}cm & ${w}kg: Size M chuẩn form Á, rộng vai 45cm đứng dáng lịch sự.`;
+                conf = '96%';
+            } else if (h > 181 || w > 78) {
+                size = 'XL';
+                desc = `Với ${h}cm & ${w}kg: Size XL đảm bảo cầu vai 51cm rộng rãi, không bị kích nách.`;
+                conf = '95%';
+            }
+
+            if (pref === 'oversize' && size === 'M') size = 'L';
+            if (pref === 'oversize' && size === 'L' && (h >= 178 || w >= 72)) {
+                size = 'XL';
+                desc = `Vì bạn thích mặc rộng Boxy/Oversize với chiều cao ${h}cm, nhích lên Size XL sẽ phủ rộng cực chuẩn.`;
+            }
+            if (pref === 'slim' && size === 'L' && w < 68) size = 'M';
+
+            aiRecommendedSize = size;
+            document.getElementById('recommended-size-badge').textContent = size;
+            document.getElementById('rec-size-text').textContent = `Size ${size} (Chuẩn Form)`;
+            document.getElementById('rec-confidence').textContent = `Độ tương thích: ${conf}`;
+            document.getElementById('rec-detail-desc').textContent = desc;
+        }
+
+        function applyAISize() {
+            selectSize(aiRecommendedSize);
+            showToast('Đã áp dụng Size từ AI', `Đã chọn tự động Size ${aiRecommendedSize} khớp với chiều cao & cân nặng của bạn.`);
+        }
+
+        // 5. 90-DAY PRICE HISTORY CHART
+        function updatePriceChart(mode) {
+            const pData = productCatalog[currentProduct];
+            const btn90 = document.getElementById('chart-btn-90');
+            const btnFake = document.getElementById('chart-btn-fake');
+            const svgBox = document.getElementById('price-chart-svg');
+            const verdictBox = document.getElementById('price-verdict-box');
+            const verdictIcon = document.getElementById('price-verdict-icon');
+            const verdictTitle = document.getElementById('price-verdict-title');
+            const verdictDesc = document.getElementById('price-verdict-desc');
+
+            if (mode === 'fake') {
+                btnFake.className = 'px-3 py-1.5 rounded-lg font-bold bg-ftu-red text-white shadow-sm transition';
+                btn90.className = 'px-3 py-1.5 rounded-lg font-semibold text-slate-600 hover:bg-white transition';
+                svgBox.innerHTML = `
+                    <svg viewBox="0 0 360 130" class="w-full h-full overflow-visible">
+                        <line x1="20" y1="25" x2="340" y2="25" stroke="#e2e8f0" stroke-dasharray="3"/>
+                        <line x1="20" y1="75" x2="340" y2="75" stroke="#e2e8f0" stroke-dasharray="3"/>
+                        <line x1="20" y1="110" x2="340" y2="110" stroke="#cbd5e1"/>
+                        <polyline fill="none" stroke="#e11d48" stroke-width="3.5" points="25,85 85,85 145,85 205,85 255,18 295,18 335,85"/>
+                        <circle cx="255" cy="18" r="5" fill="#e11d48"/>
+                        <text x="175" y="12" fill="#e11d48" font-size="10" font-weight="bold">Nâng khống lên ${pData.priceFakeHigh} trước Sale!</text>
+                        <circle cx="335" cy="85" r="5" fill="#e11d48"/>
+                        <text x="260" y="104" fill="#475569" font-size="10" font-weight="bold">Sale ảo: ${pData.priceCurrent}</text>
+                    </svg>
+                `;
+                document.getElementById('price-stat-high').textContent = `${pData.priceFakeHigh} (Tăng ảo)`;
+                document.getElementById('price-stat-avg').textContent = pData.priceCurrent;
+                document.getElementById('price-stat-now').textContent = `${pData.priceCurrent} (Không giảm!)`;
+                document.getElementById('price-stat-now').className = 'text-xs font-extrabold text-ftu-red';
+
+                verdictBox.className = 'bg-rose-50 border border-rose-300 rounded-2xl p-4 flex items-start gap-3';
+                verdictIcon.className = 'fa-solid fa-triangle-exclamation text-ftu-red text-lg mt-0.5';
+                verdictTitle.className = 'font-bold text-rose-950';
+                verdictTitle.textContent = 'PHÁT HIỆN CHIÊU TRÒ: Nâng giá gốc lên gấp đôi rồi giảm giá ảo!';
+                verdictDesc.className = 'text-rose-800 mt-0.5 leading-relaxed';
+                verdictDesc.textContent = `Gian hàng bán mức ${pData.priceCurrent} suốt 80 ngày nhưng đột ngột đẩy giá niêm yết lên ${pData.priceFakeHigh} trước ngày Sale để lừa người mua tưởng được giảm 50%.`;
+            } else {
+                btn90.className = 'px-3 py-1.5 rounded-lg font-bold bg-indigo-600 text-white shadow-sm transition';
+                btnFake.className = 'px-3 py-1.5 rounded-lg font-semibold text-rose-600 hover:bg-rose-50 transition';
+                svgBox.innerHTML = `
+                    <svg viewBox="0 0 360 130" class="w-full h-full overflow-visible">
+                        <line x1="20" y1="30" x2="340" y2="30" stroke="#e2e8f0" stroke-dasharray="3"/>
+                        <line x1="20" y1="70" x2="340" y2="70" stroke="#e2e8f0" stroke-dasharray="3"/>
+                        <line x1="20" y1="110" x2="340" y2="110" stroke="#cbd5e1"/>
+                        <polyline fill="none" stroke="#10b981" stroke-width="3.5" points="25,40 85,36 145,36 205,40 265,50 335,95"/>
+                        <circle cx="145" cy="36" r="4" fill="#64748b"/>
+                        <text x="105" y="25" fill="#64748b" font-size="10" font-weight="bold">Ổn định: ${pData.priceOld}</text>
+                        <circle cx="335" cy="95" r="5.5" fill="#10b981"/>
+                        <text x="240" y="108" fill="#047857" font-size="10" font-weight="bold">Thấp nhất 90 ngày: ${pData.priceCurrent}</text>
+                    </svg>
+                `;
+                document.getElementById('price-stat-high').textContent = pData.priceOld;
+                document.getElementById('price-stat-avg').textContent = pData.priceAvg;
+                document.getElementById('price-stat-now').textContent = `${pData.priceCurrent} (Đáy)`;
+                document.getElementById('price-stat-now').className = 'text-xs font-extrabold text-emerald-600';
+
+                verdictBox.className = 'bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-start gap-3';
+                verdictIcon.className = 'fa-solid fa-circle-check text-emerald-600 text-lg mt-0.5';
+                verdictTitle.className = 'font-bold text-emerald-900';
+                verdictTitle.textContent = 'Xác nhận: Khuyến mãi thật (-18% so với trung bình 90 ngày)';
+                verdictDesc.className = 'text-emerald-700 mt-0.5 leading-relaxed';
+                verdictDesc.textContent = `Sản phẩm giữ giá ổn định ${pData.priceOld} suốt 3 tháng qua. Mức giá ${pData.priceCurrent} hiện tại là ưu đãi thực chất.`;
+            }
+        }
+
+        // 6. REVIEWS FILTERING, LIVE SUBMISSION & AI SUMMARY
+        function filterReviews(filterKey) {
+            currentReviewFilter = filterKey;
+            ['verified', 'after30days', 'critical', 'spam'].forEach(k => {
+                const btn = document.getElementById(`rev-btn-${k}`);
+                if (k === filterKey) {
+                    btn.className = k === 'spam'
+                        ? 'px-3 py-1.5 rounded-xl text-xs font-bold bg-ftu-red text-white shadow-sm transition'
+                        : 'px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm transition';
+                } else {
+                    btn.className = k === 'spam'
+                        ? 'px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-50 text-ftu-red border border-rose-200 hover:bg-rose-100 transition'
+                        : 'px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+                }
+            });
+
+            const validCount = reviewsList.filter(r => r.type !== 'spam').length;
+            document.getElementById('count-verified').textContent = validCount;
+            document.getElementById('total-reviews-count').textContent = validCount;
+
+            const filtered = reviewsList.filter(r => {
+                if (filterKey === 'verified') return r.type !== 'spam';
+                if (filterKey === 'critical') return r.stars <= 3 && r.type !== 'spam';
+                return r.type === filterKey;
+            });
+
+            const container = document.getElementById('reviews-list-container');
+            container.innerHTML = filtered.map(r => `
+                <div class="p-3.5 rounded-2xl border ${r.type === 'spam' ? 'bg-rose-50/60 border-rose-300' : r.isNew ? 'bg-emerald-50/70 border-emerald-400' : 'bg-slate-50/70 border-slate-200/80'} space-y-1.5 transition-all">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-xs text-slate-900">${r.author}</span>
+                            <span class="text-amber-500 text-[11px] font-bold">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${r.type === 'spam' ? 'bg-ftu-red text-white' : 'bg-emerald-100 text-emerald-800'}">
+                                ${r.badge}
+                            </span>
+                            ${r.isNew ? '<span class="bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Vừa gửi xong</span>' : ''}
+                        </div>
+                        <span class="text-[11px] text-slate-400 font-medium">${r.daysUsed}</span>
+                    </div>
+                    <p class="text-xs ${r.type === 'spam' ? 'line-through text-slate-500' : 'text-slate-700'} leading-relaxed">${r.content}</p>
+                    <div class="flex items-center justify-between pt-1 text-[11px]">
+                        <span class="font-semibold ${r.type === 'spam' ? 'text-ftu-red' : 'text-indigo-600'}">
+                            <i class="fa-solid fa-microchip mr-1"></i>${r.aiNote}
+                        </span>
+                        ${r.type !== 'spam' ? `<button onclick="likeReview(${r.id})" class="text-slate-500 hover:text-indigo-600 font-medium"><i class="fa-regular fa-thumbs-up mr-1"></i>Hữu ích (${r.helpful})</button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function likeReview(id) {
+            const item = reviewsList.find(r => r.id === id);
+            if (item) {
+                item.helpful += 1;
+                localStorage.setItem('trustcart_reviews_v3', JSON.stringify(reviewsList));
+                filterReviews(currentReviewFilter);
+            }
+        }
+
+        function submitUserReview(e) {
+            e.preventDefault();
+            const name = document.getElementById('rev-input-name').value.trim();
+            const stars = parseInt(document.getElementById('rev-input-stars').value, 10);
+            const tag = document.getElementById('rev-input-tag').value;
+            const content = document.getElementById('rev-input-content').value.trim();
+
+            if (!name || !content) return;
+
+            // Simple AI Spam Detection check on live input
+            const isSeedingSpam = content.toLowerCase().includes('nhận xu') || content.length < 8;
+
+            const newReview = {
+                id: Date.now(),
+                type: isSeedingSpam ? 'spam' : (stars <= 3 ? 'critical' : tag),
+                author: name,
+                badge: isSeedingSpam
+                    ? 'ĐÃ BỊ AI CHẶN - Nghi vấn bình luận spam nhận xu'
+                    : (tag === 'after30days' ? 'Đánh giá sau 30 ngày sử dụng' : 'Đã trải nghiệm trên TrustCart VN'),
+                stars: stars,
+                daysUsed: 'Vừa gửi tức thì',
+                content: content,
+                helpful: 1,
+                isNew: true,
+                aiNote: isSeedingSpam
+                    ? 'AI Review Shield tự động chặn do phát hiện cụm từ nhận xu/quá ngắn.'
+                    : 'AI chấm điểm tin cậy: 98/100 (Ngôn ngữ tự nhiên, nhận xét thực tế)'
+            };
+
+            reviewsList.unshift(newReview);
+            localStorage.setItem('trustcart_reviews_v3', JSON.stringify(reviewsList));
+
+            document.getElementById('rev-input-content').value = '';
+            filterReviews(isSeedingSpam ? 'spam' : 'verified');
+
+            if (isSeedingSpam) {
+                showToast('AI Review Shield Đã Chặn!', 'Bình luận của bạn chứa từ khóa "nhận xu" hoặc quá ngắn nên đã bị AI đưa vào tab Spam.');
+            } else {
+                showToast('Đã đăng đánh giá thành công!', `Cảm ơn ${name}! Bình luận của bạn đã được lưu và hiển thị trực tiếp trên trang.`);
+            }
+        }
+
+        function summarizeReviewsWithAI() {
+            const validReviews = reviewsList.filter(r => r.type !== 'spam').map(r => r.content).join(' | ');
+            openAIChatWithPrompt(`Hãy đóng vai hệ thống AI Review Shield tóm tắt ngắn gọn 3 ưu điểm và 2 lưu ý khách quan nhất từ danh sách các bình luận thực tế sau đây của khách hàng: "${validReviews}"`);
+        }
+
+        // 7. PRIVACY-SHIELD LABEL & ESCROW STEPPER
+        function setLabelMode(mode) {
+            const btnSafe = document.getElementById('lbl-btn-safe');
+            const btnUnsafe = document.getElementById('lbl-btn-unsafe');
+            const card = document.getElementById('waybill-card');
+
+            if (mode === 'safe') {
+                btnSafe.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm transition';
+                btnUnsafe.className = 'px-3 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-rose-600 transition';
+                card.className = 'border-2 border-dashed border-emerald-500 bg-amber-50/30 rounded-2xl p-5 font-mono text-xs space-y-4 relative transition-all';
+
+                document.getElementById('waybill-security-tag').textContent = 'ĐÃ MÃ HÓA SĐT';
+                document.getElementById('waybill-security-tag').className = 'ml-2 font-sans bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded';
+                document.getElementById('wb-name').textContent = 'KHÁCH HÀNG TRUSTCART *** (Đã che tên)';
+                document.getElementById('wb-phone').textContent = '1900-6868 (Mã định tuyến: #5509)';
+                document.getElementById('wb-phone').className = 'font-bold text-sm text-emerald-700 bg-emerald-100 inline-block px-2 py-0.5 rounded border border-emerald-300';
+                document.getElementById('wb-item').textContent = 'Kiện hàng tiêu chuẩn #K250 (Đã ẩn tên sản phẩm để tránh tráo hàng)';
+
+                const banner = document.getElementById('wb-warning-banner');
+                banner.className = 'font-sans bg-emerald-600 text-white p-2.5 rounded-xl text-xs font-semibold flex items-center gap-2';
+                banner.innerHTML = '<i class="fa-solid fa-shield-halved text-base"></i><span>An toàn tuyệt đối: Kẻ gian nhặt vỏ hộp cũng không thể biết SĐT hay danh tính của bạn!</span>';
+            } else {
+                btnUnsafe.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-ftu-red text-white shadow-sm transition';
+                btnSafe.className = 'px-3 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-emerald-700 transition';
+                card.className = 'border-2 border-dashed border-rose-500 bg-rose-50/40 rounded-2xl p-5 font-mono text-xs space-y-4 relative transition-all';
+
+                document.getElementById('waybill-security-tag').textContent = 'LỘ SĐT & TÊN HÀNG';
+                document.getElementById('waybill-security-tag').className = 'ml-2 font-sans bg-ftu-red text-white text-[10px] font-bold px-2 py-0.5 rounded';
+                document.getElementById('wb-name').textContent = 'NGUYỄN MINH ANH (Phòng 302 Khu KTX)';
+                document.getElementById('wb-phone').textContent = '0987.654.321 (In công khai trên hộp)';
+                document.getElementById('wb-phone').className = 'font-bold text-sm text-rose-700 bg-rose-100 inline-block px-2 py-0.5 rounded border border-rose-300';
+                document.getElementById('wb-item').textContent = '1x Áo Khoác Cao Cấp 459.000₫ (Rất dễ bị kẻ gian nhắm tới)';
+
+                const banner = document.getElementById('wb-warning-banner');
+                banner.className = 'font-sans bg-ftu-red text-white p-2.5 rounded-xl text-xs font-semibold flex items-center gap-2';
+                banner.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-base"></i><span>Cảnh báo: Phiếu truyền thống làm lộ SĐT để kẻ xấu gọi điện giả danh Shipper lừa chuyển khoản!</span>';
+            }
+        }
+
+        function setEscrowStep(stepNum) {
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`escrow-btn-${i}`);
+                btn.className = i === stepNum
+                    ? 'p-2.5 rounded-xl border text-left transition bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                    : 'p-2.5 rounded-xl border text-left transition bg-slate-50 text-slate-700 border-slate-200 hover:bg-white';
+            }
+            const step = escrowStepsData[stepNum];
+            document.getElementById('escrow-detail-card').innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">${step.badge}</span>
+                        <i class="fa-solid ${step.icon} text-2xl text-indigo-600"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-slate-900">${step.title}</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">${step.desc}</p>
+                </div>
+                <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                    <button onclick="toggleOrdersModal()" class="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-box-open"></i> Mở danh sách Đơn hàng để thử Đổi trả 1-Chạm
+                    </button>
+                    ${stepNum < 4 ? `<button onclick="setEscrowStep(${stepNum + 1})" class="text-xs font-bold text-indigo-600 hover:underline">Bước tiếp theo <i class="fa-solid fa-arrow-right ml-1"></i></button>` : ''}
+                </div>
+            `;
+        }
+
+        // 8. CHECKOUT, ANTI-FOMO & ORDER MANAGEMENT
+        function openCheckoutFlow(source) {
+            const pData = productCatalog[currentProduct];
+            const total = (pData.priceNum * currentQty).toLocaleString('vi-VN') + '₫';
+            document.getElementById('chk-prod-name').textContent = pData.title;
+            document.getElementById('chk-prod-variant').textContent = `Phân loại: ${selectedColorName} • Size ${selectedSize} • SL: ${currentQty}`;
+            document.getElementById('chk-prod-total').textContent = total;
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            updateFomoScore();
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function previewVirtualPhone(val) {
+            const last4 = val.replace(/\D/g, '').slice(-4) || '8821';
+            document.getElementById('virtual-phone-preview').innerHTML = `<i class="fa-solid fa-lock mr-1"></i>SĐT thật được giấu kín -> In trên hộp hàng: <strong>1900-6868 (Nhánh ảo #${last4})</strong>`;
+        }
+
+        function updateFomoScore() {
+            const checks = document.querySelectorAll('.fomo-check:checked').length;
+            const box = document.getElementById('fomo-advice-box');
+            if (checks === 3) {
+                box.className = 'text-[11px] text-emerald-700 font-semibold';
+                box.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i>3/3 tiêu chí tỉnh táo: Quyết định mua sắm có kế hoạch và hợp lý!';
+            } else {
+                box.className = 'text-[11px] text-amber-700 font-semibold';
+                box.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i>Nếu còn phân vân, bạn hãy bấm nút "Khóa giữ giá ưu đãi 24h" để suy nghĩ thêm nhé!';
+            }
+        }
+
+        function activateCoolingOff() {
+            closeCheckoutModal();
+            showToast('Đã khóa giữ mức giá ưu đãi 24 Giờ!', 'Hệ thống chống FOMO đã bảo lưu mức giá giảm cho bạn trong 24h tới để bạn không bị áp lực mua vội.');
+        }
+
+        function submitRealOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('chk-input-name').value.trim();
+            const phone = document.getElementById('chk-input-phone').value.trim();
+            const payment = document.getElementById('chk-input-payment').value;
+            const pData = productCatalog[currentProduct];
+            const total = (pData.priceNum * currentQty).toLocaleString('vi-VN') + '₫';
+            const randomCode = '#TC-' + Math.floor(100000 + Math.random() * 900000) + '-VN';
+            const pin = phone.replace(/\D/g, '').slice(-4) || '6868';
+
+            const newOrder = {
+                orderCode: randomCode,
+                productName: pData.title,
+                variant: `${selectedColorName} • Size ${selectedSize} • SL: ${currentQty}`,
+                total: total,
+                customerName: name,
+                virtualPhone: `1900-6868 (Nhánh ảo #${pin})`,
+                payment: payment,
+                status: 'Đang giữ tiền bảo vệ người mua (Escrow)',
+                time: 'Vừa đặt xong'
+            };
+
+            ordersList.unshift(newOrder);
+            localStorage.setItem('trustcart_orders_v3', JSON.stringify(ordersList));
+            updateOrdersBadge();
+
+            // Also update the Waybill simulator on page with user's masked info
+            document.getElementById('wb-order-code').textContent = `MĐH: ${randomCode}`;
+            document.getElementById('wb-name').textContent = `${name.slice(0, 4)}*** (Khách hàng TrustCart)`;
+            document.getElementById('wb-phone').textContent = `1900-6868 (Mã định tuyến: #${pin})`;
+
+            closeCheckoutModal();
+            toggleOrdersModal();
+            showToast('Đặt Hàng Thành Công!', `Mã vận đơn ẩn danh ${randomCode} đã được tạo và lưu vào mục Đơn hàng.`);
+        }
+
+        function updateOrdersBadge() {
+            document.getElementById('orders-badge').textContent = ordersList.length;
+            document.getElementById('cart-badge').textContent = ordersList.length;
+        }
+
+        function toggleOrdersModal() {
+            const modal = document.getElementById('orders-modal');
+            modal.classList.toggle('hidden');
+            renderOrdersList();
+        }
+
+        function renderOrdersList() {
+            const container = document.getElementById('orders-list-container');
+            container.innerHTML = ordersList.map((o, idx) => `
+                <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/80 space-y-2.5">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/80 pb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-mono font-bold text-xs text-indigo-700">${o.orderCode}</span>
+                            <span class="text-[10px] text-slate-400">• ${o.time}</span>
+                        </div>
+                        <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${o.status.includes('Hoàn tiền') ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">
+                            <i class="fa-solid fa-shield-halved mr-1"></i>${o.status}
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-start gap-3">
+                        <div class="text-xs space-y-1">
+                            <p class="font-bold text-slate-900">${o.productName}</p>
+                            <p class="text-slate-500 text-[11px]">${o.variant}</p>
+                            <p class="text-emerald-700 text-[11px] font-semibold"><i class="fa-solid fa-user-shield mr-1"></i>Người nhận: ${o.customerName} | SĐT Ẩn danh: ${o.virtualPhone}</p>
+                        </div>
+                        <span class="text-sm font-extrabold text-indigo-600 shrink-0">${o.total}</span>
+                    </div>
+                    <div class="pt-1 flex items-center justify-between gap-2">
+                        <span class="text-[11px] text-slate-500">${o.payment}</span>
+                        ${!o.status.includes('Hoàn tiền') ? `
+                            <button onclick="triggerInstantRefund(${idx})" class="bg-white hover:bg-rose-50 text-ftu-red border border-rose-200 font-bold px-3 py-1.5 rounded-xl text-[11px] transition shadow-sm">
+                                <i class="fa-solid fa-rotate-left mr-1"></i>Yêu cầu Đổi trả 1-Chạm (Hoàn tiền 2h)
+                            </button>
+                        ` : `<span class="text-[11px] font-bold text-emerald-600"><i class="fa-solid fa-circle-check mr-1"></i>Đã giải ngân hoàn tiền từ quỹ Escrow</span>`}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function triggerInstantRefund(idx) {
+            ordersList[idx].status = 'Đã kích hoạt Đổi trả 1-Chạm • Hoàn tiền 100% trong 2h';
+            localStorage.setItem('trustcart_orders_v3', JSON.stringify(ordersList));
+            renderOrdersList();
+            showToast('Đã kích hoạt Đổi trả 1-Chạm!', 'Bưu tá đang tới thu hồi kiện hàng tại nhà và Quỹ Escrow đã lệnh hoàn tiền 100% cho bạn.');
+        }
+
+        function resetDemoData() {
+            localStorage.removeItem('trustcart_reviews_v3');
+            localStorage.removeItem('trustcart_orders_v3');
+            reviewsList = [...defaultReviews];
+            ordersList = [...defaultOrders];
+            filterReviews('verified');
+            updateOrdersBadge();
+            showToast('Đã khôi phục dữ liệu gốc!', 'Toàn bộ bình luận và đơn hàng đã được đưa về trạng thái chuẩn để bắt đầu bài thuyết trình mới.');
+        }
+
+        // 9. AI CONSUMER ADVOCATE CHATBOT (GEMINI API + SMART FALLBACK)
+        let customGeminiKey = localStorage.getItem('trustcart_gemini_key') || '';
+
+        function toggleAIChat(forceOpen) {
+            const win = document.getElementById('ai-chat-window');
+            if (forceOpen === true) {
+                win.classList.remove('hidden');
+            } else if (forceOpen === false) {
+                win.classList.add('hidden');
+            } else {
+                win.classList.toggle('hidden');
+            }
+        }
+
+        function toggleApiKeyConfig() {
+            const drawer = document.getElementById('api-key-drawer');
+            drawer.classList.toggle('hidden');
+            document.getElementById('custom-gemini-key').value = customGeminiKey;
+        }
+
+        function saveCustomApiKey() {
+            customGeminiKey = document.getElementById('custom-gemini-key').value.trim();
+            localStorage.setItem('trustcart_gemini_key', customGeminiKey);
+            document.getElementById('api-key-drawer').classList.add('hidden');
+            showToast('Đã lưu Gemini API Key!', 'Trợ lý AI sẽ sử dụng API Key của bạn để phản hồi trực tiếp.');
+        }
+
+        function openAIChatWithPrompt(promptText) {
+            toggleAIChat(true);
+            sendQuickPrompt(promptText);
+        }
+
+        function sendQuickPrompt(text) {
+            const input = document.getElementById('ai-chat-input');
+            input.value = text;
+            handleChatSubmit(new Event('submit'));
+        }
+
+        function appendChatMessage(role, htmlText) {
+            const box = document.getElementById('ai-chat-messages');
+            const wrapper = document.createElement('div');
+            if (role === 'user') {
+                wrapper.className = 'flex justify-end';
+                wrapper.innerHTML = `<div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[82%] shadow-sm leading-relaxed">${htmlText}</div>`;
+            } else {
+                wrapper.className = 'flex items-start gap-2.5';
+                wrapper.innerHTML = `
+                    <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-robot text-xs"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm text-slate-700 max-w-[85%] leading-relaxed space-y-1">${htmlText}</div>
+                `;
+            }
+            box.appendChild(wrapper);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        async function handleChatSubmit(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const input = document.getElementById('ai-chat-input');
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            input.value = '';
+            appendChatMessage('user', userText);
+
+            // Show typing indicator
+            const box = document.getElementById('ai-chat-messages');
+            const loadingEl = document.createElement('div');
+            loadingEl.className = 'flex items-center gap-2 text-slate-400 text-[11px] pl-9';
+            loadingEl.innerHTML = `<span class="w-1.5 h-1.5 bg-indigo-500 rounded-full typing-dot"></span><span class="w-1.5 h-1.5 bg-indigo-500 rounded-full typing-dot"></span><span class="w-1.5 h-1.5 bg-indigo-500 rounded-full typing-dot"></span> <span>AI đang phân tích dữ liệu sản phẩm...</span>`;
+            box.appendChild(loadingEl);
+            box.scrollTop = box.scrollHeight;
+
+            const reply = await fetchGeminiOrFallback(userText);
+            loadingEl.remove();
+            appendChatMessage('ai', reply);
+        }
+
+        async function fetchGeminiOrFallback(userQuery) {
+            const pData = productCatalog[currentProduct];
+            const systemInstruction = `Bạn là "AI Consumer Advocate" (Trợ lý AI Bảo vệ Người tiêu dùng) trên nền tảng thương mại điện tử minh bạch TrustCart VN (Đồ án môn Thương mại điện tử tại Trường Đại học Ngoại Thương - FTU).
+Nguyên tắc cốt lõi của bạn:
+1. Luôn đứng về phía người mua, tư vấn trung thực, khách quan, tuyệt đối không khen ảo để ép chốt đơn.
+2. Thông tin sản phẩm đang xem: ${pData.title}, Giá hiện tại: ${pData.priceCurrent} (Thấp nhất 90 ngày qua, giảm thật từ ${pData.priceOld}). Định lượng chất liệu: ${pData.specVal2}.
+3. Bảng size chuẩn: S (<1m63, <54kg), M (1m63-1m71, 54-63kg), L (1m72-1m80, 64-75kg, ví dụ 1m78 nặng 70kg mặc size L chuẩn đẹp), XL (>1m80 hoặc >76kg).
+4. Nếu khách hỏi mặc chạy bộ hay chơi thể thao ngoài trời nóng ở TP.HCM: Khuyên thật lòng là vải Cotton 250gsm hoặc Blazer khá dày để giữ form đứng lịch sự khi đi học, đi làm, ngồi máy lạnh; nếu chạy bộ vận động mạnh sẽ hơi ấm, nên cân nhắc.
+5. Giải thích rõ 5 giải pháp của TrustCart VN khi được hỏi: (1) Ảnh Cam thường tại kho & AI Virtual Fit, (2) Biểu đồ giá 90 ngày & AI Review Shield lọc seeding, (3) Phiếu vận đơn ẩn danh PrivacyShield mã hóa SĐT thật thành tổng đài ảo 1900-6868, (4) Giữ tiền bảo chứng Escrow & Đổi trả 1-Chạm hoàn tiền trong 2 giờ, (5) Anti-FOMO Guard giữ giá 24h.
+Trả lời ngắn gọn (khoảng 3-5 câu), rõ ràng, thân thiện bằng tiếng Việt.`;
+
+            const apiKey = customGeminiKey || "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+
+            // Try calling Gemini API with backoff
+            const delays = [800, 1600];
+            for (let attempt = 0; attempt <= delays.length; attempt++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) {
+                        const result = await response.json();
+                        const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                        if (text) {
+                            return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                        }
+                    }
+                } catch (err) {
+                    // Continue to retry or smart fallback
+                }
+                if (attempt < delays.length) {
+                    await new Promise(r => setTimeout(r, delays[attempt]));
+                }
+            }
+
+            // Smart Knowledge-Base Fallback (Guarantees 100% reliability during live classroom presentation)
+            return generateSmartFallbackReply(userQuery);
+        }
+
+        function generateSmartFallbackReply(q) {
+            const lower = q.toLowerCase();
+            if (lower.includes('1m78') || lower.includes('70kg') || lower.includes('size')) {
+                return `Với thông số <strong>cao 1m78 và nặng 70kg</strong> (hoặc câu hỏi về kích cỡ của bạn), mình khuyên dùng <strong>Size L</strong> là chuẩn form nhất (Độ tương thích 97%). Ở Size L, phần vai áo rộng 48cm và dài áo 72cm giúp bạn mặc vừa vặn phần ngực, vai đứng dáng mà không bị cộc khi vận động. Nếu bạn thích mặc trùm rộng kiểu Oversize Hàn Quốc thì có thể nhích lên Size XL nhé!`;
+            }
+            if (lower.includes('nóng') || lower.includes('chạy bộ') || lower.includes('thể thao') || lower.includes('250gsm')) {
+                return `<strong>Lời khuyên thật lòng từ AI Bảo vệ Người mua:</strong> Dòng áo Cotton Compact <strong>250gsm</strong> này có sợi vải dệt khá dày và đanh mịn để giữ form đứng lịch sự khi đi học ở FTU, đi cà phê hoặc ngồi phòng máy lạnh. Nếu bạn mua để <strong>chạy bộ hay chơi bóng chuyền, vận động ra nhiều mồ hôi ở TP.HCM</strong> thì chất vải 250gsm sẽ hơi dày và ấm, bạn nên ưu tiên áo thun thể thao chuyên dụng mỏng nhẹ hơn nhé!`;
+            }
+            if (lower.includes('số điện thoại') || lower.includes('sđt') || lower.includes('shipper') || lower.includes('lộ')) {
+                return `Trên <strong>TrustCart VN</strong>, khi bạn đặt hàng, công nghệ <strong>PrivacyShield™</strong> sẽ tự động che tên thật và mã hóa số điện thoại cá nhân của bạn thành số tổng đài ảo <strong>1900-6868 (kèm nhánh định tuyến 4 số)</strong> in trên hộp. Shipper vẫn gọi được cho bạn qua tổng đài nhưng kẻ gian nhặt vỏ hộp sẽ không bao giờ biết SĐT thật hay tên món hàng bên trong!`;
+            }
+            if (lower.includes('tóm tắt') || lower.includes('bình luận') || lower.includes('ưu điểm')) {
+                return `<strong>Báo cáo Tóm tắt từ AI Review Shield:</strong><br>• <strong>Ưu điểm (94% đồng tình):</strong> Chất vải dày dặn đúng y hệt ảnh chụp Cam thường tại kho, bo cổ chắc chắn không dão sau 30 ngày giặt máy, phiếu giao hàng bảo mật tốt.<br>• <strong>Lưu ý khách quan:</strong> Form áo thiết kế hơi rộng ngang, chất vải dày hợp mặc đi học/đi chơi hơn là vận động thể thao ngoài nắng.`;
+            }
+            return `Cảm ơn câu hỏi của bạn! Trên nền tảng <strong>TrustCart VN</strong>, bạn được bảo vệ bởi <strong>5 lớp công nghệ</strong>: (1) Xem ảnh Cam thường tại kho & AI chọn size, (2) Biểu đồ giá 90 ngày chống Sale ảo, (3) AI Review Shield chặn bình luận seeding, (4) Vận đơn ẩn danh PrivacyShield che SĐT, và (5) Giữ tiền bảo chứng Escrow hoàn tiền trong 2 giờ. Bạn có thể bấm đặt hàng thử ngay trên trang để trải nghiệm nhé!`;
+        }
+
+        // Initialize on page load
+        window.onload = function () {
+            renderVisualShowcase();
+            calculateAIFit();
+            updatePriceChart(90);
+            filterReviews('verified');
+            setEscrowStep(1);
+            updateOrdersBadge();
+        };
+    </script>
+</body>
+</html>
